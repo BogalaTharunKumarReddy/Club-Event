@@ -94,7 +94,6 @@ import { MediaGallery } from '@/components/domain/MediaGallery';
 import { EventComments } from '@/components/domain/EventComments';
 import type {
   AnnouncementResponse,
-  CertificateParticipantResponse,
   CertificateRecipientScope,
   CertificateResponse,
   CertificateTemplateRequest,
