@@ -1,0 +1,109 @@
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: campusconnect
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/campusconnect?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:tharun1437}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    open-in-view: false
+    show-sql: ${JPA_SHOW_SQL:false}
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  # Mail is optional in development. If credentials are absent, the app still boots
+  # and the NotificationService logs messages instead of sending them.
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# ---- Application specific configuration ----
+app:
+  jwt:
+    # NEVER commit a real secret. Override JWT_SECRET in production (min 32 bytes / 256 bits).
+    secret: BcQraUHV/s+MQZolSUk+iGBXqNx8uqz3R8R3rSZyTC5DeJlBU4rawIlM2NUY4XoVI+aE8TmehceKJ5F3NVUuug==
+    access-token-expiration-ms: ${JWT_ACCESS_EXPIRATION:3600000}      # 1 hour
+    refresh-token-expiration-ms: ${JWT_REFRESH_EXPIRATION:604800000}  # 7 days
+    issuer: campusconnect
+
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
+
+  mail:
+    enabled: ${MAIL_ENABLED:false}
+    from: ${MAIL_FROM:no-reply@campusconnect.local}
+
+  frontend:
+    base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
+
+  seed:
+    # Populates realistic demo data on first startup when the DB is empty.
+    enabled: ${SEED_ENABLED:true}
+
+  # Payment gateway abstraction. Provider credentials must come from env, never hardcoded.
+  payment:
+    provider: ${PAYMENT_PROVIDER:mock}
+    currency: ${PAYMENT_CURRENCY:INR}
+
+  # File storage abstraction. 'local' writes under a directory and serves via /api/files;
+  # 's3' targets AWS S3 or any S3-compatible store. Credentials come from env, never hardcoded.
+  storage:
+    provider: ${STORAGE_PROVIDER:local}          # local | s3
+    local:
+      directory: ${STORAGE_LOCAL_DIR:./uploads}
+      public-base-url: ${STORAGE_PUBLIC_BASE_URL:/api/files}
+    s3:
+      bucket: ${STORAGE_S3_BUCKET:}
+      region: ${STORAGE_S3_REGION:us-east-1}
+      endpoint: ${STORAGE_S3_ENDPOINT:}          # optional; set for MinIO/R2/Spaces
+      access-key: ${STORAGE_S3_ACCESS_KEY:}
+      secret-key: ${STORAGE_S3_SECRET_KEY:}
+      path-style: ${STORAGE_S3_PATH_STYLE:false}
+      public-base-url: ${STORAGE_S3_PUBLIC_BASE_URL:}  # optional CDN/base URL for object links
+
+  # AI integration is interface-only until a key is supplied via env.
+  ai:
+    enabled: ${AI_ENABLED:false}
+    provider: ${AI_PROVIDER:openai}
+    base-url: ${AI_BASE_URL:https://api.openai.com/v1}
+    api-key: ${AI_API_KEY:}
+    model: ${AI_MODEL:gpt-4o-mini}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    org.springframework.security: ${LOG_SECURITY_LEVEL:INFO}
+    com.campusconnect: ${LOG_APP_LEVEL:INFO}

@@ -1,0 +1,182 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { STORAGE_KEYS } from '@/lib/constants';
+
+/**
+ * Internationalisation bootstrap.
+ *
+ * Two bundled languages (English + Hindi) demonstrate the pattern; add more by
+ * extending `resources`. Detection order prefers a value the user explicitly
+ * chose (localStorage) before falling back to the browser language.
+ */
+
+const resources = {
+  en: {
+    translation: {
+      appName: 'CampusConnect',
+      tagline: 'Discover clubs. Join events. Compete. Get certified.',
+      nav: {
+        home: 'Home',
+        events: 'Events',
+        clubs: 'Clubs',
+        dashboard: 'Dashboard',
+        myEvents: 'My Events',
+        certificates: 'Certificates',
+        verifyCertificate: 'Verify Certificate',
+        notifications: 'Notifications',
+        profile: 'Profile',
+        login: 'Sign in',
+        register: 'Sign up',
+        logout: 'Sign out',
+      },
+      common: {
+        loading: 'Loading…',
+        save: 'Save',
+        cancel: 'Cancel',
+        delete: 'Delete',
+        edit: 'Edit',
+        create: 'Create',
+        search: 'Search',
+        submit: 'Submit',
+        back: 'Back',
+        confirm: 'Confirm',
+        close: 'Close',
+        noResults: 'Nothing here yet.',
+        required: 'This field is required',
+        actions: 'Actions',
+        viewAll: 'View all',
+        retry: 'Retry',
+      },
+      auth: {
+        welcomeBack: 'Welcome back',
+        createAccount: 'Create your account',
+        email: 'Email',
+        password: 'Password',
+        fullName: 'Full name',
+        studentId: 'Student ID',
+        department: 'Department',
+        phone: 'Phone',
+        forgotPassword: 'Forgot password?',
+        noAccount: 'New to CampusConnect?',
+        haveAccount: 'Already have an account?',
+        signingIn: 'Signing in…',
+        creating: 'Creating account…',
+      },
+      events: {
+        title: 'Events',
+        upcoming: 'Upcoming events',
+        featured: 'Featured',
+        register: 'Register',
+        registered: 'Registered',
+        cancelRegistration: 'Cancel registration',
+        capacity: 'Capacity',
+        fee: 'Fee',
+        free: 'Free',
+        teamEvent: 'Team event',
+        deadline: 'Registration deadline',
+        noEvents: 'No events match your filters.',
+      },
+      clubs: {
+        title: 'Clubs',
+        join: 'Join club',
+        leave: 'Leave club',
+        members: 'Members',
+        pendingApproval: 'Pending approval',
+        noClubs: 'No clubs found.',
+      },
+    },
+  },
+  hi: {
+    translation: {
+      appName: 'कैंपसकनेक्ट',
+      tagline: 'क्लब खोजें। इवेंट्स में शामिल हों। प्रतिस्पर्धा करें। प्रमाणित हों।',
+      nav: {
+        home: 'होम',
+        events: 'इवेंट्स',
+        clubs: 'क्लब',
+        dashboard: 'डैशबोर्ड',
+        myEvents: 'मेरे इवेंट्स',
+        certificates: 'प्रमाणपत्र',
+        verifyCertificate: 'प्रमाणपत्र सत्यापित करें',
+        notifications: 'सूचनाएं',
+        profile: 'प्रोफ़ाइल',
+        login: 'साइन इन',
+        register: 'साइन अप',
+        logout: 'साइन आउट',
+      },
+      common: {
+        loading: 'लोड हो रहा है…',
+        save: 'सहेजें',
+        cancel: 'रद्द करें',
+        delete: 'हटाएं',
+        edit: 'संपादित करें',
+        create: 'बनाएं',
+        search: 'खोजें',
+        submit: 'सबमिट करें',
+        back: 'वापस',
+        confirm: 'पुष्टि करें',
+        close: 'बंद करें',
+        noResults: 'यहां अभी कुछ नहीं है।',
+        required: 'यह फ़ील्ड आवश्यक है',
+        actions: 'क्रियाएं',
+        viewAll: 'सभी देखें',
+        retry: 'पुनः प्रयास करें',
+      },
+      auth: {
+        welcomeBack: 'वापसी पर स्वागत है',
+        createAccount: 'अपना खाता बनाएं',
+        email: 'ईमेल',
+        password: 'पासवर्ड',
+        fullName: 'पूरा नाम',
+        studentId: 'छात्र आईडी',
+        department: 'विभाग',
+        phone: 'फ़ोन',
+        forgotPassword: 'पासवर्ड भूल गए?',
+        noAccount: 'कैंपसकनेक्ट पर नए हैं?',
+        haveAccount: 'पहले से खाता है?',
+        signingIn: 'साइन इन हो रहा है…',
+        creating: 'खाता बन रहा है…',
+      },
+      events: {
+        title: 'इवेंट्स',
+        upcoming: 'आगामी इवेंट्स',
+        featured: 'विशेष',
+        register: 'रजिस्टर करें',
+        registered: 'रजिस्टर्ड',
+        cancelRegistration: 'रजिस्ट्रेशन रद्द करें',
+        capacity: 'क्षमता',
+        fee: 'शुल्क',
+        free: 'निःशुल्क',
+        teamEvent: 'टीम इवेंट',
+        deadline: 'रजिस्ट्रेशन की अंतिम तिथि',
+        noEvents: 'आपके फ़िल्टर से कोई इवेंट मेल नहीं खाता।',
+      },
+      clubs: {
+        title: 'क्लब',
+        join: 'क्लब में शामिल हों',
+        leave: 'क्लब छोड़ें',
+        members: 'सदस्य',
+        pendingApproval: 'अनुमोदन लंबित',
+        noClubs: 'कोई क्लब नहीं मिला।',
+      },
+    },
+  },
+} as const;
+
+void i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: 'en',
+    supportedLngs: ['en', 'hi'],
+    interpolation: { escapeValue: false },
+    detection: {
+      order: ['localStorage', 'navigator'],
+      lookupLocalStorage: STORAGE_KEYS.language,
+      caches: ['localStorage'],
+    },
+  });
+
+export default i18n;
