@@ -5,13 +5,9 @@ import {
   Building2,
   CalendarCheck,
   CalendarDays,
-<<<<<<< HEAD
   CreditCard,
   LayoutDashboard,
   QrCode,
-=======
-  LayoutDashboard,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Ticket,
   Users2,
 } from 'lucide-react';
@@ -33,18 +29,11 @@ import {
 import { useQuery } from '@/hooks/useApi';
 import { useAuth } from '@/context/AuthContext';
 import { REGISTRATION_STATUS_LABELS } from '@/lib/constants';
-<<<<<<< HEAD
 import { formatDate } from '@/lib/utils';
 import { PageContainer } from '@/components/layout/RootLayout';
 import { EventCard } from '@/components/domain/EventCard';
 import { StatCard } from '@/components/domain/StatCard';
 import { Avatar, Skeleton } from '@/components/ui';
-=======
-import { PageContainer } from '@/components/layout/RootLayout';
-import { EventCard } from '@/components/domain/EventCard';
-import { StatCard } from '@/components/domain/StatCard';
-import { Skeleton } from '@/components/ui';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import type { RegistrationStatus } from '@/types';
 
 const STATUS_COLORS: Record<RegistrationStatus, string> = {
@@ -72,7 +61,6 @@ export default function DashboardPage() {
   );
 
   const activeMemberships = (memberships ?? []).filter((m) => m.status === 'ACTIVE');
-<<<<<<< HEAD
   // Clubs where the signed-in user participates as a member (not coordinator) —
   // drives the member-only section below.
   const memberClubs = activeMemberships.filter((m) => m.clubRole === 'MEMBER');
@@ -82,9 +70,6 @@ export default function DashboardPage() {
   const awaitingPayment = (regs?.content ?? []).filter(
     (r) => r.paidEvent && !r.ticketReady && r.status !== 'CANCELLED',
   );
-=======
-  const activeRegs = (regs?.content ?? []).filter((r) => r.status !== 'CANCELLED');
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const chartData = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -147,7 +132,6 @@ export default function DashboardPage() {
         />
       </div>
 
-<<<<<<< HEAD
       {/* Action needed: registrations awaiting payment */}
       {awaitingPayment.length > 0 && (
         <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/50 dark:bg-amber-900/20">
@@ -225,8 +209,6 @@ export default function DashboardPage() {
         </section>
       )}
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Activity chart */}
         <div className="card p-5 lg:col-span-1">
@@ -269,15 +251,6 @@ export default function DashboardPage() {
         <div className="lg:col-span-2">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="font-semibold text-slate-900 dark:text-slate-100">Upcoming events</h3>
-<<<<<<< HEAD
-=======
-            <Link
-              to="/events"
-              className="text-sm font-semibold text-brand-600 hover:text-brand-700"
-            >
-              Browse all
-            </Link>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </div>
           {upcoming && upcoming.content.length > 0 ? (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

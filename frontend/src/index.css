@@ -40,7 +40,6 @@
 @layer components {
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold
-<<<<<<< HEAD
            transition-all duration-150 focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-60
            active:scale-[0.98];
   }
@@ -50,39 +49,22 @@
   }
   .btn-secondary {
     @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 hover:border-slate-400
-=======
-           transition-colors focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-60;
-  }
-  .btn-primary {
-    @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800;
-  }
-  .btn-secondary {
-    @apply btn border border-slate-300 bg-white text-slate-700 hover:bg-slate-100
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
            dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700;
   }
   .btn-ghost {
     @apply btn text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800;
   }
   .btn-danger {
-<<<<<<< HEAD
     @apply btn bg-red-600 text-white shadow-sm shadow-red-600/20 hover:bg-red-700 hover:shadow-md;
   }
   .btn-success {
     @apply btn bg-emerald-600 text-white shadow-sm shadow-emerald-600/20 hover:bg-emerald-700 hover:shadow-md;
-=======
-    @apply btn bg-red-600 text-white hover:bg-red-700;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   }
 
   .input {
     @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900
-<<<<<<< HEAD
            placeholder:text-slate-400 transition-colors
            focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30
-=======
-           placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
            dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500;
   }
   .label {
@@ -96,7 +78,6 @@
     @apply rounded-xl border border-slate-200 bg-white shadow-sm
            dark:border-slate-800 dark:bg-slate-900;
   }
-<<<<<<< HEAD
   /* Interactive cards (clickable tiles) lift slightly on hover. */
   .card-hover {
     @apply card transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lg
@@ -139,9 +120,5 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
-=======
-  .badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   }
 }

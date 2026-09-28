@@ -1,11 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { GraduationCap, Menu } from 'lucide-react';
-<<<<<<< HEAD
 import { useAuth } from '@/context/AuthContext';
 import { roleHome } from '@/lib/roleHome';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { NotificationBell } from './NotificationBell';
@@ -19,10 +16,7 @@ import { GlobalSearch } from './GlobalSearch';
  */
 export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
   const { t } = useTranslation();
-<<<<<<< HEAD
   const { user } = useAuth();
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-slate-200 bg-white/80 px-4 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80 sm:px-6">
@@ -35,11 +29,7 @@ export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
       </button>
 
       {/* Brand shown on mobile (sidebar is hidden there). */}
-<<<<<<< HEAD
       <Link to={roleHome(user?.role)} className="flex items-center gap-2 lg:hidden">
-=======
-      <Link to="/app/dashboard" className="flex items-center gap-2 lg:hidden">
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
           <GraduationCap className="h-4 w-4" />
         </span>

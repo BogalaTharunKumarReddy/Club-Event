@@ -5,10 +5,7 @@ import {
   CalendarPlus,
   ExternalLink,
   Plus,
-<<<<<<< HEAD
   RotateCcw,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Search,
   Settings2,
   Users2,
@@ -17,17 +14,10 @@ import toast from 'react-hot-toast';
 import { clubService } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
 import { useAuth } from '@/context/AuthContext';
-<<<<<<< HEAD
 import { errorMessage } from '@/lib/utils';
 import { PageContainer } from '@/components/layout/RootLayout';
 import { StatCard } from '@/components/domain/StatCard';
 import { CreateClubModal } from '@/components/domain/CreateClubModal';
-=======
-import { EVENT_CATEGORIES } from '@/lib/constants';
-import { errorMessage } from '@/lib/utils';
-import { PageContainer } from '@/components/layout/RootLayout';
-import { StatCard } from '@/components/domain/StatCard';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import {
   Avatar,
   Badge,
@@ -35,24 +25,12 @@ import {
   ConfirmDialog,
   EmptyState,
   ErrorState,
-<<<<<<< HEAD
   PageHeader,
   Select,
   Spinner,
   TextInput,
 } from '@/components/ui';
 import type { ClubResponse } from '@/types';
-=======
-  Field,
-  Modal,
-  PageHeader,
-  Select,
-  Spinner,
-  TextArea,
-  TextInput,
-} from '@/components/ui';
-import type { ClubRequest, ClubResponse } from '@/types';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
 /**
  * Coordinator → Clubs. A management hub (distinct from the public `/clubs`
@@ -123,7 +101,6 @@ export default function CoordinatorClubsPage() {
     reload();
   }
 
-<<<<<<< HEAD
   // Reactivate brings a deactivated club back into the public catalog.
   async function handleReactivate(club: ClubResponse) {
     try {
@@ -135,8 +112,6 @@ export default function CoordinatorClubsPage() {
     }
   }
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   return (
     <PageContainer>
       <PageHeader
@@ -279,11 +254,7 @@ export default function CoordinatorClubsPage() {
                                 >
                                   <Settings2 className="h-4 w-4" /> Manage
                                 </Link>
-<<<<<<< HEAD
                                 {club.active ? (
-=======
-                                {club.active && (
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                                   <Button
                                     variant="ghost"
                                     size="sm"
@@ -294,7 +265,6 @@ export default function CoordinatorClubsPage() {
                                   >
                                     Deactivate
                                   </Button>
-<<<<<<< HEAD
                                 ) : (
                                   <Button
                                     variant="ghost"
@@ -306,8 +276,6 @@ export default function CoordinatorClubsPage() {
                                   >
                                     <RotateCcw className="h-4 w-4" /> Reactivate
                                   </Button>
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                                 )}
                               </div>
                             </td>
@@ -346,117 +314,3 @@ export default function CoordinatorClubsPage() {
   );
 }
 
-<<<<<<< HEAD
-=======
-function CreateClubModal({
-  open,
-  onClose,
-  coordinatorName,
-  onCreated,
-}: {
-  open: boolean;
-  onClose: () => void;
-  coordinatorName?: string;
-  onCreated: () => void;
-}) {
-  const [form, setForm] = useState<ClubRequest>({ name: '' });
-  const [busy, setBusy] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
-
-  function set<K extends keyof ClubRequest>(key: K, value: ClubRequest[K]) {
-    setForm((f) => ({ ...f, [key]: value }));
-  }
-
-  async function submit() {
-    if (!form.name.trim()) {
-      setErr('Club name is required.');
-      return;
-    }
-    setBusy(true);
-    setErr(null);
-    try {
-      await clubService.create({
-        ...form,
-        name: form.name.trim(),
-        description: form.description || undefined,
-        category: form.category || undefined,
-        contactEmail: form.contactEmail || undefined,
-      });
-      toast.success('Club created!');
-      setForm({ name: '' });
-      onCreated();
-    } catch (e) {
-      setErr(errorMessage(e, 'Could not create club.'));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <Modal
-      open={open}
-      onClose={busy ? () => undefined : onClose}
-      title="Create a club"
-      footer={
-        <>
-          <Button variant="secondary" onClick={onClose} disabled={busy}>
-            Cancel
-          </Button>
-          <Button onClick={submit} loading={busy}>
-            Create club
-          </Button>
-        </>
-      }
-    >
-      <div className="space-y-4">
-        <Field label="Club name" htmlFor="club-name" required>
-          <TextInput
-            id="club-name"
-            value={form.name}
-            onChange={(e) => set('name', e.target.value)}
-            placeholder="e.g. Coding Club"
-            autoFocus
-          />
-        </Field>
-        <Field label="Category" htmlFor="club-category">
-          <Select
-            id="club-category"
-            value={form.category ?? ''}
-            onChange={(e) => set('category', e.target.value)}
-          >
-            <option value="">Select a category</option>
-            {EVENT_CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </Select>
-        </Field>
-        <Field label="Description" htmlFor="club-desc">
-          <TextArea
-            id="club-desc"
-            rows={3}
-            value={form.description ?? ''}
-            onChange={(e) => set('description', e.target.value)}
-            placeholder="What is this club about?"
-          />
-        </Field>
-        <Field
-          label="Contact email"
-          htmlFor="club-email"
-          hint={coordinatorName ? `You (${coordinatorName}) will be the coordinator.` : undefined}
-        >
-          <TextInput
-            id="club-email"
-            type="email"
-            value={form.contactEmail ?? ''}
-            onChange={(e) => set('contactEmail', e.target.value)}
-            placeholder="club@college.edu"
-          />
-        </Field>
-        {err && <p className="field-error">{err}</p>}
-      </div>
-    </Modal>
-  );
-}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6

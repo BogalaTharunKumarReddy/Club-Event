@@ -1,8 +1,4 @@
 import { Bookmark } from 'lucide-react';
-<<<<<<< HEAD
-=======
-import { Link } from 'react-router-dom';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { eventService } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
 import { PageContainer } from '@/components/layout/RootLayout';
@@ -40,14 +36,6 @@ export default function MySavedEventsPage() {
             icon={<Bookmark className="h-6 w-6" />}
             title="No saved events yet"
             description="Tap the bookmark on any event to save it here for later."
-<<<<<<< HEAD
-=======
-            action={
-              <Link to="/events" className="btn-primary">
-                Browse events
-              </Link>
-            }
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           />
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

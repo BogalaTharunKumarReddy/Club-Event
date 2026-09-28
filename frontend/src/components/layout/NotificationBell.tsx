@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { Bell, Check, CheckCheck, X } from 'lucide-react';
-=======
-import { Bell, Check, CheckCheck } from 'lucide-react';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { useNotifications } from '@/context/NotificationContext';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { cn, fromNow } from '@/lib/utils';
 
 export function NotificationBell() {
-<<<<<<< HEAD
   const { notifications, unreadCount, markRead, markAllRead, remove } = useNotifications();
-=======
-  const { notifications, unreadCount, markRead, markAllRead } = useNotifications();
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   const [open, setOpen] = useState(false);
   const ref = useClickOutside<HTMLDivElement>(() => setOpen(false));
 
@@ -76,7 +68,6 @@ export function NotificationBell() {
                         {fromNow(n.createdAt)}
                       </p>
                     </div>
-<<<<<<< HEAD
                     <div className="flex shrink-0 flex-col items-center gap-1">
                       {!n.read && (
                         <button
@@ -101,20 +92,6 @@ export function NotificationBell() {
                         <X className="h-3.5 w-3.5" />
                       </button>
                     </div>
-=======
-                    {!n.read && (
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          void markRead(n.id);
-                        }}
-                        className="rounded p-1 text-slate-400 hover:bg-slate-100 hover:text-brand-600 dark:hover:bg-slate-800"
-                        aria-label="Mark as read"
-                      >
-                        <Check className="h-3.5 w-3.5" />
-                      </button>
-                    )}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                   </div>
                 );
 

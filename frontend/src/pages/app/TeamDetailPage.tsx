@@ -14,13 +14,8 @@ import {
   ConfirmDialog,
   ErrorState,
   Field,
-<<<<<<< HEAD
   PageHeader,
   SectionLoader,
-=======
-  FullPageLoader,
-  PageHeader,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   TextInput,
 } from '@/components/ui';
 import type { TeamMemberResponse } from '@/types';
@@ -41,11 +36,7 @@ export default function TeamDetailPage() {
   const [removeMember, setRemoveMember] = useState<TeamMemberResponse | null>(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
-<<<<<<< HEAD
   if (loading) return <SectionLoader />;
-=======
-  if (loading) return <FullPageLoader />;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (error || !team) {
     return (
       <PageContainer>

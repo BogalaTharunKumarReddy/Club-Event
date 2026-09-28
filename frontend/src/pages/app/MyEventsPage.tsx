@@ -1,20 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { CalendarDays, CreditCard, QrCode, Star, Users } from 'lucide-react';
-=======
-import { CalendarDays, QrCode, Users } from 'lucide-react';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import toast from 'react-hot-toast';
 import { registrationService } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
 import { errorMessage, formatDate } from '@/lib/utils';
 import { PageContainer } from '@/components/layout/RootLayout';
 import { TicketModal } from '@/components/domain/TicketModal';
-<<<<<<< HEAD
 import { FeedbackModal } from '@/components/domain/FeedbackModal';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import {
   Button,
   ConfirmDialog,
@@ -31,10 +24,7 @@ export default function MyEventsPage() {
   const [page, setPage] = useState(0);
   const [ticketReg, setTicketReg] = useState<RegistrationResponse | null>(null);
   const [cancelReg, setCancelReg] = useState<RegistrationResponse | null>(null);
-<<<<<<< HEAD
   const [feedbackReg, setFeedbackReg] = useState<RegistrationResponse | null>(null);
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const { data, loading, error, reload } = useQuery(
     () => registrationService.mine(page, 10),
@@ -73,16 +63,7 @@ export default function MyEventsPage() {
           <EmptyState
             icon={<CalendarDays className="h-6 w-6" />}
             title="No registrations yet"
-<<<<<<< HEAD
             description="Your registrations, tickets and team entries will appear here once you sign up for an event."
-=======
-            description="Browse events and sign up to see them here."
-            action={
-              <Link to="/events" className="btn-primary">
-                Browse events
-              </Link>
-            }
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           />
         ) : (
           <>
@@ -106,7 +87,6 @@ export default function MyEventsPage() {
                       )}
                     </div>
                     <p className="mt-1 text-xs text-slate-400">
-<<<<<<< HEAD
                       Registered {formatDate(reg.createdAt)}
                       {reg.ticketReady ? (
                         <>
@@ -120,10 +100,6 @@ export default function MyEventsPage() {
                           </span>
                         </>
                       ) : null}
-=======
-                      Registered {formatDate(reg.createdAt)} · Ticket{' '}
-                      <span className="font-mono">{reg.ticketCode}</span>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                     </p>
                   </div>
                   <div className="flex shrink-0 gap-2">
@@ -134,7 +110,6 @@ export default function MyEventsPage() {
                     )}
                     {reg.status !== 'CANCELLED' && (
                       <>
-<<<<<<< HEAD
                         {reg.eventStatus === 'COMPLETED' && (
                           <Button
                             variant="secondary"
@@ -166,22 +141,6 @@ export default function MyEventsPage() {
                             Cancel
                           </Button>
                         )}
-=======
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          onClick={() => setTicketReg(reg)}
-                        >
-                          <QrCode className="h-4 w-4" /> Ticket
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setCancelReg(reg)}
-                        >
-                          Cancel
-                        </Button>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                       </>
                     )}
                   </div>
@@ -200,7 +159,6 @@ export default function MyEventsPage() {
           open={!!ticketReg}
           onClose={() => setTicketReg(null)}
           registration={ticketReg}
-<<<<<<< HEAD
           onVerified={reload}
         />
       )}
@@ -211,8 +169,6 @@ export default function MyEventsPage() {
           onClose={() => setFeedbackReg(null)}
           eventId={feedbackReg.eventId}
           eventTitle={feedbackReg.eventTitle}
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         />
       )}
 

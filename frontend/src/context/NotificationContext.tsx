@@ -21,12 +21,9 @@ interface NotificationContextValue {
   reload: () => Promise<void>;
   markRead: (id: number) => Promise<void>;
   markAllRead: () => Promise<void>;
-<<<<<<< HEAD
   markUnread: (id: number) => Promise<void>;
   remove: (id: number) => Promise<void>;
   clearAll: () => Promise<void>;
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }
 
 const NotificationContext = createContext<NotificationContextValue | undefined>(
@@ -79,32 +76,6 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     isAuthenticated,
   );
 
-<<<<<<< HEAD
-=======
-  const markRead = useCallback(async (id: number) => {
-    // Optimistic update, then persist.
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-    );
-    setUnreadCount((c) => Math.max(0, c - 1));
-    try {
-      await notificationService.markRead(id);
-    } catch {
-      void reloadSilently();
-    }
-  }, []);
-
-  const markAllRead = useCallback(async () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-    setUnreadCount(0);
-    try {
-      await notificationService.markAllRead();
-    } catch {
-      void reloadSilently();
-    }
-  }, []);
-
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   // Reconcile with the server if an optimistic write failed.
   const reloadSilently = useCallback(async () => {
     try {
@@ -119,7 +90,6 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-<<<<<<< HEAD
   const markRead = useCallback(
     async (id: number) => {
       // Optimistic update, then persist.
@@ -225,11 +195,6 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
       remove,
       clearAll,
     ],
-=======
-  const value = useMemo<NotificationContextValue>(
-    () => ({ notifications, unreadCount, loading, reload, markRead, markAllRead }),
-    [notifications, unreadCount, loading, reload, markRead, markAllRead],
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   );
 
   return (

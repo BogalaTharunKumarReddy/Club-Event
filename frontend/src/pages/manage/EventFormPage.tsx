@@ -9,21 +9,13 @@ import { clubService, eventService } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
 import { EVENT_CATEGORIES, EVENT_MODE_LABELS } from '@/lib/constants';
 import { errorMessage } from '@/lib/utils';
-<<<<<<< HEAD
 import { optionalImageUrl } from '@/lib/validation';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { PageContainer } from '@/components/layout/RootLayout';
 import {
   Button,
   Field,
-<<<<<<< HEAD
   PageHeader,
   SectionLoader,
-=======
-  FullPageLoader,
-  PageHeader,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Select,
   TextArea,
   TextInput,
@@ -38,11 +30,7 @@ const schema = z
     category: z.string().optional(),
     mode: z.enum(['ONLINE', 'OFFLINE', 'HYBRID']),
     description: z.string().optional(),
-<<<<<<< HEAD
     bannerUrl: optionalImageUrl,
-=======
-    bannerUrl: z.string().url('Enter a valid URL').or(z.literal('')).optional(),
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     venue: z.string().optional(),
     onlineUrl: z.string().url('Enter a valid URL').or(z.literal('')).optional(),
     startDateTime: z.string().min(1, 'Start date is required'),
@@ -171,11 +159,7 @@ export default function EventFormPage() {
   const team = watch('teamEvent');
   const mode = watch('mode');
 
-<<<<<<< HEAD
   if (clubsLoading || (isEdit && eventLoading)) return <SectionLoader />;
-=======
-  if (clubsLoading || (isEdit && eventLoading)) return <FullPageLoader />;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const onSubmit = async (values: FormValues) => {
     const payload: EventRequest = {

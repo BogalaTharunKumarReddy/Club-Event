@@ -4,22 +4,14 @@ import {
   Award,
   BarChart3,
   CalendarClock,
-<<<<<<< HEAD
   CalendarDays,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   CreditCard,
   HandHeart,
   ImageIcon,
   Megaphone,
   MessageSquare,
-<<<<<<< HEAD
   Plus,
   QrCode,
-=======
-  QrCode,
-  Settings2,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Star,
   Trophy,
   Users,
@@ -204,7 +196,6 @@ export default function CoordinatorWorkspacePage({ section }: { section: Workspa
         <EmptyState
           icon={meta.icon}
           title="No events to manage yet"
-<<<<<<< HEAD
           description="Create your first event, then manage its registrations, attendance, certificates and more here."
           action={
             <div className="flex flex-wrap items-center justify-center gap-2">
@@ -215,13 +206,6 @@ export default function CoordinatorWorkspacePage({ section }: { section: Workspa
                 <CalendarDays className="h-4 w-4" /> View all events
               </Link>
             </div>
-=======
-          description="Create an event from your coordinator tools, then manage it here."
-          action={
-            <Link to="/app/manage" className="btn-primary">
-              <Settings2 className="h-4 w-4" /> Go to coordinator tools
-            </Link>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           }
         />
       ) : (

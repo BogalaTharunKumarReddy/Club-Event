@@ -62,7 +62,6 @@ const resources = {
         haveAccount: 'Already have an account?',
         signingIn: 'Signing in…',
         creating: 'Creating account…',
-<<<<<<< HEAD
         usePassword: 'Sign in with password',
         useCode: 'Sign in with a one-time code',
         codeSignIn: 'Sign in with a code',
@@ -76,8 +75,6 @@ const resources = {
         verifying: 'Verifying…',
         resendCode: 'Resend code',
         backToSignIn: 'Back to sign in',
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       },
       events: {
         title: 'Events',
@@ -153,7 +150,6 @@ const resources = {
         haveAccount: 'पहले से खाता है?',
         signingIn: 'साइन इन हो रहा है…',
         creating: 'खाता बन रहा है…',
-<<<<<<< HEAD
         usePassword: 'पासवर्ड से साइन इन करें',
         useCode: 'वन-टाइम कोड से साइन इन करें',
         codeSignIn: 'कोड से साइन इन करें',
@@ -167,8 +163,6 @@ const resources = {
         verifying: 'सत्यापित हो रहा है…',
         resendCode: 'कोड पुनः भेजें',
         backToSignIn: 'साइन इन पर वापस जाएं',
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       },
       events: {
         title: 'इवेंट्स',

@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
 import { BadgeCheck, QrCode, ShieldCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
-=======
-import { QrCode } from 'lucide-react';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { registrationService } from '@/lib/services';
 import { errorMessage } from '@/lib/utils';
 import { Modal } from '@/components/ui/Modal';
 import { Spinner } from '@/components/ui/Spinner';
-<<<<<<< HEAD
 import { Button, Field, TextInput } from '@/components/ui';
 import type { RegistrationResponse } from '@/types';
 
@@ -21,39 +16,22 @@ import type { RegistrationResponse } from '@/types';
  * encodes only the opaque ticket code (never personal data), so the image is
  * safe to display and screenshot. Verification sends a 6-digit code to the
  * owner's email + WhatsApp and confirms it against the backend.
-=======
-import type { RegistrationResponse } from '@/types';
-
-/**
- * Shows the QR ticket for a registration.
- *
- * The QR image is generated server-side and fetched as a PNG blob; the payload
- * encodes only the opaque ticket code (never personal data), so the image is
- * safe to display and screenshot.
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
  */
 export function TicketModal({
   open,
   onClose,
   registration,
-<<<<<<< HEAD
   onVerified,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }: {
   open: boolean;
   onClose: () => void;
   registration: RegistrationResponse;
-<<<<<<< HEAD
   /** Called with the updated registration once a ticket is successfully verified. */
   onVerified?: (updated: RegistrationResponse) => void;
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }) {
   const [src, setSrc] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-<<<<<<< HEAD
   // Ticket-verification sub-flow.
   const [verified, setVerified] = useState(registration.ticketVerified);
   const [codeSent, setCodeSent] = useState(false);
@@ -62,22 +40,17 @@ export function TicketModal({
   const [code, setCode] = useState('');
   const [verifyError, setVerifyError] = useState<string | null>(null);
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   useEffect(() => {
     if (!open) return;
     let url: string | null = null;
     let active = true;
     setSrc(null);
     setError(null);
-<<<<<<< HEAD
     // Reset the verify sub-flow each time the modal opens for a registration.
     setVerified(registration.ticketVerified);
     setCodeSent(false);
     setCode('');
     setVerifyError(null);
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     registrationService
       .ticketQr(registration.id)
       .then((blob) => {
@@ -90,7 +63,6 @@ export function TicketModal({
       active = false;
       if (url) URL.revokeObjectURL(url);
     };
-<<<<<<< HEAD
   }, [open, registration.id, registration.ticketVerified]);
 
   const sendCode = async () => {
@@ -129,9 +101,6 @@ export function TicketModal({
       setConfirming(false);
     }
   };
-=======
-  }, [open, registration.id]);
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   return (
     <Modal open={open} onClose={onClose} title="Your ticket" size="sm">
@@ -139,7 +108,6 @@ export function TicketModal({
         <p className="text-sm font-medium text-slate-900 dark:text-slate-100">
           {registration.eventTitle}
         </p>
-<<<<<<< HEAD
 
         {verified && (
           <span className="badge-success mt-2 inline-flex items-center gap-1">
@@ -148,8 +116,6 @@ export function TicketModal({
           </span>
         )}
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         <div className="my-4 flex h-56 w-56 items-center justify-center rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700">
           {error ? (
             <span className="text-sm text-red-600">{error}</span>
@@ -166,7 +132,6 @@ export function TicketModal({
         <p className="mt-3 text-xs text-slate-400 dark:text-slate-500">
           Present this at the venue to check in.
         </p>
-<<<<<<< HEAD
 
         {/* ---- one-time-code verification ---- */}
         {!verified && (
@@ -226,8 +191,6 @@ export function TicketModal({
             )}
           </div>
         )}
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       </div>
     </Modal>
   );

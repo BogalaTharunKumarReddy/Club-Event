@@ -2,11 +2,7 @@ import { forwardRef, type ButtonHTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 import { Spinner } from './Spinner';
 
-<<<<<<< HEAD
 type Variant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'success';
-=======
-type Variant = 'primary' | 'secondary' | 'ghost' | 'danger';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 type Size = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -21,10 +17,7 @@ const VARIANT_CLASSES: Record<Variant, string> = {
   secondary: 'btn-secondary',
   ghost: 'btn-ghost',
   danger: 'btn-danger',
-<<<<<<< HEAD
   success: 'btn-success',
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 };
 
 const SIZE_CLASSES: Record<Size, string> = {

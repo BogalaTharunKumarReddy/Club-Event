@@ -16,14 +16,11 @@ import type {
   CertificateType,
   CertificateRecipientScope,
   AuditAction,
-<<<<<<< HEAD
   VolunteerStatus,
   VolunteerTaskStatus,
   VolunteerTaskPriority,
   VolunteerAttendanceStatus,
   VolunteerAssignmentStatus,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 } from '@/types';
 
 /** Base URL for REST calls. Defaults to the Vite dev-proxy path. */
@@ -45,18 +42,12 @@ export const STORAGE_KEYS = {
   refreshToken: 'cc.refreshToken',
   theme: 'cc.theme',
   language: 'cc.language',
-<<<<<<< HEAD
   sidebarCollapsed: 'cc.sidebarCollapsed',
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 } as const;
 
 export const ROLE_LABELS: Record<Role, string> = {
   STUDENT: 'Student',
-<<<<<<< HEAD
   VOLUNTEER: 'Volunteer',
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   CLUB_MEMBER: 'Club Member',
   CLUB_COORDINATOR: 'Club Coordinator',
   ADMIN: 'Administrator',
@@ -129,7 +120,6 @@ export const MEMBERSHIP_STATUS_LABELS: Record<MembershipStatus, string> = {
   LEFT: 'Left',
 };
 
-<<<<<<< HEAD
 /* ------------------------------ volunteers ------------------------------ */
 
 export const VOLUNTEER_STATUS_LABELS: Record<VolunteerStatus, string> = {
@@ -204,8 +194,6 @@ export const VOLUNTEER_ASSIGNMENT_STATUS_STYLES: Record<VolunteerAssignmentStatu
   CANCELLED: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300',
 };
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 export const CERTIFICATE_TYPE_LABELS: Record<CertificateType, string> = {
   PARTICIPATION: 'Participation',
   WINNER: 'Winner',
@@ -252,12 +240,9 @@ export const CLUB_STAFF_ROLES: Role[] = ['CLUB_MEMBER', 'CLUB_COORDINATOR'];
 /** Roles allowed to reach the full-platform admin console. */
 export const ADMIN_ROLES: Role[] = ['ADMIN'];
 
-<<<<<<< HEAD
 /** Roles allowed to reach the volunteer workspace. */
 export const VOLUNTEER_ROLES: Role[] = ['VOLUNTEER'];
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 export const DEFAULT_PAGE_SIZE = 12;
 
 export const EVENT_CATEGORIES = [

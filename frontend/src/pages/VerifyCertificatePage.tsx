@@ -29,7 +29,6 @@ export default function VerifyCertificatePage() {
   const [actionError, setActionError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-<<<<<<< HEAD
   // Inline visual preview of the rendered certificate (the actual PDF with its
   // background, text and QR) so a valid result shows the certificate itself,
   // not just its metadata.
@@ -37,8 +36,6 @@ export default function VerifyCertificatePage() {
   const [previewLoading, setPreviewLoading] = useState(false);
   const [previewError, setPreviewError] = useState<string | null>(null);
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   async function verify(value: string) {
     const trimmed = value.trim();
     if (!trimmed) return;
@@ -86,7 +83,6 @@ export default function VerifyCertificatePage() {
     }
   }
 
-<<<<<<< HEAD
   // Once a certificate verifies as valid, fetch its rendered PDF and show it
   // inline so the visitor sees the actual certificate (background, text and QR),
   // not just its metadata. The object URL is revoked on cleanup to avoid leaks.
@@ -121,8 +117,6 @@ export default function VerifyCertificatePage() {
     };
   }, [result?.valid, verifiedCode]);
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   // Auto-verify when a code is present in the URL.
   useEffect(() => {
     if (codeParam) void verify(codeParam);
@@ -183,7 +177,6 @@ export default function VerifyCertificatePage() {
                       <p className="text-xs opacity-80">Issued by CampusConnect</p>
                     </div>
                   </div>
-<<<<<<< HEAD
 
                   {/* The certificate itself, rendered inline so a valid result shows
                       the actual document (background, text and QR), not just its details. */}
@@ -205,8 +198,6 @@ export default function VerifyCertificatePage() {
                     )}
                   </div>
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                   <dl className="divide-y divide-slate-100 px-5 dark:divide-slate-800">
                     <Row label="Recipient" value={result.recipientName} />
                     <Row label="Event" value={result.eventTitle} />

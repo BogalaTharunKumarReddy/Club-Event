@@ -2,27 +2,17 @@
  * STOMP-over-SockJS client manager.
  *
  * A single shared `Client` is reused across the app; components subscribe to
-<<<<<<< HEAD
  * topics through `subscribe()` and receive parsed JSON payloads. The access
  * token is attached to the STOMP CONNECT frame (see `beforeConnect`) so the
  * backend can authenticate the connection and authorize per-user topic
  * subscriptions (`/topic/notifications/{userId}`). The token is re-read on
  * every (re)connect, so a refreshed token is always used.
-=======
- * topics through `subscribe()` and receive parsed JSON payloads. The backend
- * uses a simple broker (`/topic/...`) with no per-frame auth, so no token is
- * sent on CONNECT — see the README "WebSocket hardening" note for productionis-
- * ing this (authenticate the CONNECT frame + use user-scoped destinations).
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
  */
 
 import { Client, type IMessage, type StompSubscription } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { WS_URL } from './constants';
-<<<<<<< HEAD
 import { tokenStore } from './tokenStore';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
 type Listener = (payload: unknown) => void;
 
@@ -42,7 +32,6 @@ function ensureClient(): Client {
     reconnectDelay: 4000,
     heartbeatIncoming: 10000,
     heartbeatOutgoing: 10000,
-<<<<<<< HEAD
     beforeConnect: () => {
       // Send the current access token on CONNECT so the backend can bind the
       // authenticated principal to the STOMP session. Read fresh each connect
@@ -50,8 +39,6 @@ function ensureClient(): Client {
       const token = tokenStore.getAccessToken();
       client!.connectHeaders = token ? { Authorization: `Bearer ${token}` } : {};
     },
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     onConnect: () => {
       connected = true;
       // (Re)establish broker subscriptions for every topic with listeners.

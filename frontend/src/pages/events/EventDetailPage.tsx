@@ -8,15 +8,8 @@ import {
   CreditCard,
   Download,
   ExternalLink,
-<<<<<<< HEAD
   MapPin,
   QrCode,
-=======
-  HandHeart,
-  MapPin,
-  QrCode,
-  Star,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Ticket,
   Trophy,
   Users,
@@ -31,17 +24,10 @@ import {
   paymentService,
   registrationService,
   teamService,
-<<<<<<< HEAD
 } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
 import { useAuth } from '@/context/AuthContext';
 import { openRazorpayCheckout, RazorpayDismissedError, type RazorpayCheckoutResult } from '@/lib/razorpay';
-=======
-  volunteerService,
-} from '@/lib/services';
-import { useQuery } from '@/hooks/useApi';
-import { useAuth } from '@/context/AuthContext';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { EVENT_MODE_LABELS } from '@/lib/constants';
 import {
   cn,
@@ -59,10 +45,7 @@ import { MediaGallery } from '@/components/domain/MediaGallery';
 import { EventComments } from '@/components/domain/EventComments';
 import { SaveEventButton } from '@/components/domain/SaveEventButton';
 import { TicketModal } from '@/components/domain/TicketModal';
-<<<<<<< HEAD
 import { FeedbackForm } from '@/components/domain/FeedbackForm';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import {
   Badge,
   Button,
@@ -74,10 +57,6 @@ import {
   FullPageLoader,
   Modal,
   PaymentStatusBadge,
-<<<<<<< HEAD
-=======
-  TextArea,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   TextInput,
 } from '@/components/ui';
 import type {
@@ -86,22 +65,12 @@ import type {
   PaymentResponse,
   RegistrationResponse,
   TeamResponse,
-<<<<<<< HEAD
-=======
-  VolunteerResponse,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 } from '@/types';
 
 type Tab = 'about' | 'schedule' | 'competitions' | 'gallery' | 'discussion' | 'announcements';
 
 const REGISTRABLE_STATUSES = ['PUBLISHED', 'UPCOMING', 'ONGOING'];
 
-<<<<<<< HEAD
-=======
-/** Statuses for which volunteering still makes sense (not finished/cancelled). */
-const VOLUNTEERABLE_STATUSES = ['PUBLISHED', 'UPCOMING', 'ONGOING'];
-
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 export default function EventDetailPage() {
   const { id } = useParams();
   const eventId = Number(id);
@@ -187,10 +156,7 @@ export default function EventDetailPage() {
       </PageContainer>
     );
   }
-<<<<<<< HEAD
   const eventTitle = event.title;
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const isRegistered = !!myReg && myReg.status !== 'CANCELLED';
   const isWaitlisted = myReg?.status === 'WAITLISTED';
@@ -239,7 +205,6 @@ export default function EventDetailPage() {
     }
   }
 
-<<<<<<< HEAD
   /**
    * The core payment flow, shared by the standalone "Pay" button and the combined
    * "Register & pay" action. Assumes a live (non-waitlisted) registration already
@@ -318,16 +283,6 @@ export default function EventDetailPage() {
     setWorking(true);
     try {
       await runPaymentFlow();
-=======
-  async function handlePay() {
-    setWorking(true);
-    try {
-      const payment = await paymentService.initiate({ eventId });
-      if (payment.status === 'SUCCESS') toast.success('Payment successful!');
-      else if (payment.status === 'PENDING') toast('Payment initiated.', { icon: '⏳' });
-      else toast.error('Payment did not complete.');
-      reloadPayments();
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     } catch (err) {
       toast.error(errorMessage(err, 'Payment could not be started.'));
     } finally {
@@ -335,7 +290,6 @@ export default function EventDetailPage() {
     }
   }
 
-<<<<<<< HEAD
   /**
    * Single-tap flow for paid events: register, then immediately open payment so the
    * fee is surfaced right in the registration step rather than as a hidden second
@@ -364,8 +318,6 @@ export default function EventDetailPage() {
     }
   }
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   async function handleDownloadReceipt() {
     if (!eventPayment) return;
     setDownloadingReceipt(true);
@@ -403,7 +355,6 @@ export default function EventDetailPage() {
           <img
             src={event.bannerUrl}
             alt={event.title}
-<<<<<<< HEAD
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
         )}
@@ -438,35 +389,6 @@ export default function EventDetailPage() {
               by {event.clubName}
             </Link>
           </div>
-=======
-            className="h-full w-full object-cover"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-7xl px-4 pb-5 sm:px-6 lg:px-8">
-          <button
-            onClick={() => navigate(-1)}
-            className="mb-3 inline-flex items-center gap-1 text-sm text-white/80 hover:text-white"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back
-          </button>
-          <div className="flex flex-wrap items-center gap-2">
-            <EventStatusBadge status={event.status} />
-            {event.category && (
-              <Badge className="bg-white/15 text-white">{event.category}</Badge>
-            )}
-            {event.teamEvent && (
-              <Badge className="bg-indigo-500/80 text-white">Team event</Badge>
-            )}
-          </div>
-          <h1 className="mt-2 text-2xl font-bold text-white sm:text-3xl">{event.title}</h1>
-          <Link
-            to={`/clubs/${event.clubId}`}
-            className="text-sm text-white/80 hover:text-white"
-          >
-            by {event.clubName}
-          </Link>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         </div>
       </div>
 
@@ -540,7 +462,6 @@ export default function EventDetailPage() {
 
                 {/* Feedback (after completion) */}
                 {isAuthenticated && isRegistered && event.status === 'COMPLETED' && (
-<<<<<<< HEAD
                   <section className="card p-5">
                     <h3 className="mb-3 font-semibold text-slate-900 dark:text-slate-100">
                       {myFeedback ? 'Your feedback' : 'Rate this event'}
@@ -551,13 +472,6 @@ export default function EventDetailPage() {
                       onSubmitted={reloadFeedback}
                     />
                   </section>
-=======
-                  <FeedbackSection
-                    eventId={eventId}
-                    existing={myFeedback}
-                    onSubmitted={reloadFeedback}
-                  />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                 )}
               </div>
             )}
@@ -736,7 +650,6 @@ export default function EventDetailPage() {
                       <div className="flex items-center justify-center gap-2 rounded-lg bg-green-50 py-2 text-sm font-medium text-green-700 dark:bg-green-900/30 dark:text-green-300">
                         <Ticket className="h-4 w-4" /> You're registered
                       </div>
-<<<<<<< HEAD
                       {myReg?.ticketReady ? (
                         <Button variant="secondary" fullWidth onClick={() => setTicketOpen(true)}>
                           <QrCode className="h-4 w-4" /> View ticket
@@ -748,11 +661,6 @@ export default function EventDetailPage() {
                           </p>
                         )
                       )}
-=======
-                      <Button variant="secondary" fullWidth onClick={() => setTicketOpen(true)}>
-                        <QrCode className="h-4 w-4" /> View ticket
-                      </Button>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                       {paidUnsettled && (
                         <Button fullWidth loading={working} onClick={handlePay}>
                           <CreditCard className="h-4 w-4" /> Pay {formatCurrency(event.fee)}
@@ -808,7 +716,6 @@ export default function EventDetailPage() {
                 </div>
               ) : (
                 <div className="space-y-2">
-<<<<<<< HEAD
                   <Button
                     fullWidth
                     loading={working}
@@ -816,27 +723,20 @@ export default function EventDetailPage() {
                       event.paidEvent && !isFull ? handleRegisterAndPay : handleIndividualRegister
                     }
                   >
-=======
-                  <Button fullWidth loading={working} onClick={handleIndividualRegister}>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                     {isFull ? (
                       <>
                         <Clock className="h-4 w-4" /> Join waitlist
                       </>
-<<<<<<< HEAD
                     ) : event.paidEvent ? (
                       <>
                         <CreditCard className="h-4 w-4" /> Register &amp; pay {formatCurrency(event.fee)}
                       </>
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                     ) : (
                       <>
                         <Ticket className="h-4 w-4" /> Register now
                       </>
                     )}
                   </Button>
-<<<<<<< HEAD
                   {isFull ? (
                     <WaitlistHint />
                   ) : (
@@ -847,9 +747,6 @@ export default function EventDetailPage() {
                       </p>
                     )
                   )}
-=======
-                  {isFull && <WaitlistHint />}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                 </div>
               )}
 
@@ -862,14 +759,6 @@ export default function EventDetailPage() {
 
               <AddToCalendar event={event} />
             </div>
-<<<<<<< HEAD
-=======
-
-            {/* Volunteering — help run this event. */}
-            {isAuthenticated && VOLUNTEERABLE_STATUSES.includes(event.status) && (
-              <VolunteerCard eventId={eventId} />
-            )}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </aside>
         </div>
       </PageContainer>
@@ -879,10 +768,7 @@ export default function EventDetailPage() {
           open={ticketOpen}
           onClose={() => setTicketOpen(false)}
           registration={myReg}
-<<<<<<< HEAD
           onVerified={reloadReg}
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         />
       )}
 
@@ -1101,205 +987,3 @@ function CreateTeamModal({
   );
 }
 
-<<<<<<< HEAD
-=======
-/* --------------------------- feedback section --------------------------- */
-
-function FeedbackSection({
-  eventId,
-  existing,
-  onSubmitted,
-}: {
-  eventId: number;
-  existing: FeedbackResponse | null;
-  onSubmitted: () => void;
-}) {
-  const [rating, setRating] = useState(existing?.rating ?? 0);
-  const [hover, setHover] = useState(0);
-  const [comment, setComment] = useState(existing?.comment ?? '');
-  const [suggestion, setSuggestion] = useState(existing?.suggestion ?? '');
-  const [busy, setBusy] = useState(false);
-
-  if (existing) {
-    return (
-      <section className="card p-5">
-        <h3 className="font-semibold text-slate-900 dark:text-slate-100">Your feedback</h3>
-        <div className="mt-2 flex items-center gap-1">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              className={cn(
-                'h-5 w-5',
-                i < existing.rating
-                  ? 'fill-amber-400 text-amber-400'
-                  : 'text-slate-300 dark:text-slate-600',
-              )}
-            />
-          ))}
-        </div>
-        {existing.comment && (
-          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{existing.comment}</p>
-        )}
-        <p className="mt-2 text-xs text-slate-400">Thanks for sharing your thoughts!</p>
-      </section>
-    );
-  }
-
-  async function submit() {
-    if (rating < 1) {
-      toast.error('Please pick a rating.');
-      return;
-    }
-    setBusy(true);
-    try {
-      await feedbackService.submit({
-        eventId,
-        rating,
-        comment: comment.trim() || undefined,
-        suggestion: suggestion.trim() || undefined,
-      });
-      toast.success('Feedback submitted!');
-      onSubmitted();
-    } catch (err) {
-      toast.error(errorMessage(err, 'Could not submit feedback.'));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <section className="card p-5">
-      <h3 className="font-semibold text-slate-900 dark:text-slate-100">Rate this event</h3>
-      <div className="mt-3 flex items-center gap-1">
-        {Array.from({ length: 5 }).map((_, i) => {
-          const value = i + 1;
-          return (
-            <button
-              key={i}
-              type="button"
-              onMouseEnter={() => setHover(value)}
-              onMouseLeave={() => setHover(0)}
-              onClick={() => setRating(value)}
-              aria-label={`${value} star${value > 1 ? 's' : ''}`}
-            >
-              <Star
-                className={cn(
-                  'h-7 w-7 transition',
-                  value <= (hover || rating)
-                    ? 'fill-amber-400 text-amber-400'
-                    : 'text-slate-300 dark:text-slate-600',
-                )}
-              />
-            </button>
-          );
-        })}
-      </div>
-      <div className="mt-4 space-y-3">
-        <Field label="Comment">
-          <TextArea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="What did you think?"
-            rows={3}
-          />
-        </Field>
-        <Field label="Suggestion">
-          <TextArea
-            value={suggestion}
-            onChange={(e) => setSuggestion(e.target.value)}
-            placeholder="Anything we could improve?"
-            rows={2}
-          />
-        </Field>
-        <Button onClick={submit} loading={busy}>
-          Submit feedback
-        </Button>
-      </div>
-    </section>
-  );
-}
-
-/* --------------------------- volunteer card --------------------------- */
-
-/**
- * Sidebar card that lets a signed-in user volunteer to help run the event.
- * Self-contained: it loads the user's volunteer enrollments, finds this event,
- * and shows the right state (apply / pending / approved). Rendered only for
- * authenticated users on events that haven't finished.
- */
-function VolunteerCard({ eventId }: { eventId: number }) {
-  const { data: mine, reload } = useQuery<VolunteerResponse[]>(
-    () => volunteerService.mine().catch(() => []),
-    [eventId],
-  );
-
-  const [role, setRole] = useState('');
-  const [busy, setBusy] = useState(false);
-
-  const enrollment = useMemo(
-    () => mine?.find((v) => v.eventId === eventId) ?? null,
-    [mine, eventId],
-  );
-
-  async function apply() {
-    setBusy(true);
-    try {
-      await volunteerService.apply({ eventId, preferredRole: role.trim() || undefined });
-      toast.success('Volunteer application submitted!');
-      setRole('');
-      reload();
-    } catch (err) {
-      toast.error(errorMessage(err, 'Could not submit your application.'));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <div className="card p-5">
-      <div className="flex items-center gap-2">
-        <HandHeart className="h-5 w-5 text-brand-600" />
-        <h3 className="font-semibold text-slate-900 dark:text-slate-100">Volunteering</h3>
-      </div>
-
-      {enrollment ? (
-        <div className="mt-3 space-y-3">
-          {enrollment.approved ? (
-            <div className="flex items-center gap-2 rounded-lg bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
-              <HandHeart className="h-4 w-4" /> You're a volunteer
-            </div>
-          ) : (
-            <div className="flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
-              <Clock className="h-4 w-4" /> Application pending approval
-            </div>
-          )}
-          {enrollment.role && (
-            <p className="text-xs text-slate-400">Role: {enrollment.role}</p>
-          )}
-          <Link to="/app/volunteering" className="btn-secondary w-full justify-center text-sm">
-            View my volunteering
-          </Link>
-        </div>
-      ) : (
-        <div className="mt-3 space-y-3">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Want to help organise this event? Apply to volunteer and the organisers will be in
-            touch.
-          </p>
-          <Field label="Preferred role" htmlFor="vol-pref-role" hint="Optional">
-            <TextInput
-              id="vol-pref-role"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              placeholder="e.g. Registration desk, logistics"
-            />
-          </Field>
-          <Button fullWidth loading={busy} onClick={apply}>
-            <HandHeart className="h-4 w-4" /> Volunteer for this event
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6

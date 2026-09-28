@@ -1,17 +1,9 @@
 import { useRef, useState } from 'react';
-<<<<<<< HEAD
 import { ImageIcon, Loader2, Upload, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { fileService } from '@/lib/services';
 import { cn, errorMessage } from '@/lib/utils';
 import { Field } from '@/components/ui';
-=======
-import { ImageIcon, Link2, Loader2, Upload, X } from 'lucide-react';
-import toast from 'react-hot-toast';
-import { fileService } from '@/lib/services';
-import { cn, errorMessage } from '@/lib/utils';
-import { Field, TextInput } from '@/components/ui';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
 type Shape = 'wide' | 'square' | 'circle';
 
@@ -32,26 +24,17 @@ interface ImageUploadProps {
   hint?: string;
   error?: string;
   shape?: Shape;
-<<<<<<< HEAD
-=======
-  /** Show a collapsible "paste a URL instead" input (handy for external images). Default true. */
-  allowUrl?: boolean;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   className?: string;
 }
 
 /**
  * Reusable image picker backed by the upload endpoint. Manages a single URL string: uploading a
  * file stores it via the active StorageService and reports back the resolvable URL. Falsy value =
-<<<<<<< HEAD
  * nothing selected.
  *
  * Images are chosen exclusively by uploading a file — there is intentionally no user-facing "paste
  * a URL" field. The resolvable URL is still what gets stored/returned via {@code onChange}; that is
  * an internal storage detail, not something the user types.
-=======
- * nothing selected. Optionally exposes a manual URL field for external/CDN images.
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
  */
 export function ImageUpload({
   value,
@@ -61,18 +44,10 @@ export function ImageUpload({
   hint,
   error,
   shape = 'wide',
-<<<<<<< HEAD
-=======
-  allowUrl = true,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   className,
 }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
-<<<<<<< HEAD
-=======
-  const [showUrl, setShowUrl] = useState(false);
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   async function handleFile(file: File) {
     if (!file.type.startsWith('image/')) {
@@ -145,35 +120,10 @@ export function ImageUpload({
                 Remove
               </button>
             )}
-<<<<<<< HEAD
-=======
-            {allowUrl && (
-              <button
-                type="button"
-                onClick={() => setShowUrl((s) => !s)}
-                className="btn-ghost px-3 py-1.5 text-xs"
-              >
-                <Link2 className="h-3.5 w-3.5" />
-                URL
-              </button>
-            )}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </div>
           <p className="text-xs text-slate-400 dark:text-slate-500">
             PNG, JPG, GIF or WEBP · up to 8 MB
           </p>
-<<<<<<< HEAD
-=======
-          {allowUrl && showUrl && (
-            <TextInput
-              type="url"
-              placeholder="https://…"
-              defaultValue={value ?? ''}
-              onBlur={(e) => onChange(e.target.value.trim())}
-              className="w-72 max-w-full text-xs"
-            />
-          )}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         </div>
       </div>
 

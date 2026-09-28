@@ -14,12 +14,9 @@ import type {
   AdminUserResponse,
   AnnouncementRequest,
   AnnouncementResponse,
-<<<<<<< HEAD
   AssistantChatRequest,
   AssistantChatResponse,
   AssistantStatusResponse,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   AttendanceResponse,
   AuditAction,
   AuditLogResponse,
@@ -61,10 +58,7 @@ import type {
   GlobalSearchResponse,
   JudgeResponse,
   LeaderboardEntry,
-<<<<<<< HEAD
   LoginOtpRequest,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   LoginRequest,
   ManualCheckInRequest,
   MediaRequest,
@@ -74,36 +68,24 @@ import type {
   NotificationPreferenceRequest,
   PageResponse,
   PaymentInitiateRequest,
-<<<<<<< HEAD
   PaymentConfigResponse,
   PaymentVerifyRequest,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   PaymentResponse,
   PaymentStatus,
   PlatformStatsResponse,
   RegisterRequest,
-<<<<<<< HEAD
-=======
-  RecruitVolunteerRequest,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   RegistrationRequest,
   RegistrationResponse,
   ResetPasswordRequest,
   Role,
   ScoreRequest,
   ScoreResponse,
-<<<<<<< HEAD
-=======
-  TaskStatus,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   TeamRequest,
   TeamResponse,
   UpdateCompetitionStatusRequest,
   UpdateProfileRequest,
   UploadResponse,
   UserResponse,
-<<<<<<< HEAD
   VerifyOtpRequest,
   VerifyTicketRequest,
   VolunteerAddRequest,
@@ -120,11 +102,6 @@ import type {
   VolunteerScheduleItemResponse,
   VolunteerTaskCompleteRequest,
   VolunteerTaskCreateRequest,
-=======
-  VolunteerApplyRequest,
-  VolunteerResponse,
-  VolunteerTaskRequest,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   VolunteerTaskResponse,
 } from '@/types';
 
@@ -145,15 +122,12 @@ export const authService = {
   register: (body: RegisterRequest) =>
     api.post<AuthResponse>('/auth/register', body),
   login: (body: LoginRequest) => api.post<AuthResponse>('/auth/login', body),
-<<<<<<< HEAD
   /** Passwordless sign-in: request a one-time code by email + WhatsApp. Returns a challenge. */
   requestLoginOtp: (body: LoginOtpRequest) =>
     api.post<AuthResponse>('/auth/login/otp', body),
   /** Complete any OTP challenge (2FA step-up or passwordless) — issues tokens on success. */
   verifyOtp: (body: VerifyOtpRequest) =>
     api.post<AuthResponse>('/auth/verify-otp', body),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   refresh: (refreshToken: string) =>
     api.post<AuthResponse>('/auth/refresh', { refreshToken }),
   verifyEmail: (token: string) =>
@@ -209,11 +183,8 @@ export const clubService = {
   update: (id: number, body: ClubRequest) =>
     api.put<ClubResponse>(`/clubs/${id}`, body),
   remove: (id: number) => api.delete<void>(`/clubs/${id}`),
-<<<<<<< HEAD
   /** Bring a previously-deactivated club back online (coordinator scope). */
   reactivate: (id: number) => api.post<void>(`/clubs/${id}/reactivate`),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   members: (id: number) =>
     api.get<ClubMemberResponse[]>(`/clubs/${id}/members`),
   join: (id: number) => api.post<ClubMemberResponse>(`/clubs/${id}/join`),
@@ -272,11 +243,8 @@ export const eventService = {
   remove: (id: number) => api.delete<void>(`/events/${id}`),
   addSchedule: (id: number, body: EventScheduleRequest) =>
     api.post<EventScheduleResponse>(`/events/${id}/schedule`, body),
-<<<<<<< HEAD
   updateSchedule: (id: number, scheduleId: number, body: EventScheduleRequest) =>
     api.put<EventScheduleResponse>(`/events/${id}/schedule/${scheduleId}`, body),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   removeSchedule: (id: number, scheduleId: number) =>
     api.delete<void>(`/events/${id}/schedule/${scheduleId}`),
   /** Save/bookmark an event for later. */
@@ -305,15 +273,12 @@ export const registrationService = {
       { params: { page, size } },
     ),
   ticketQr: (id: number) => api.getBlob(`/registrations/${id}/qr`),
-<<<<<<< HEAD
   /** Send a 6-digit code (email + WhatsApp) to verify ownership of this ticket. */
   requestTicketVerify: (id: number) =>
     api.post<void>(`/registrations/${id}/verify/request`),
   /** Confirm ticket ownership with the received code; returns the updated registration. */
   confirmTicketVerify: (id: number, body: VerifyTicketRequest) =>
     api.post<RegistrationResponse>(`/registrations/${id}/verify/confirm`, body),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 };
 
 /* --------------------------------- teams -------------------------------- */
@@ -348,7 +313,6 @@ export const attendanceService = {
 /* -------------------------------- payments ------------------------------ */
 
 export const paymentService = {
-<<<<<<< HEAD
   /** Non-secret checkout config (active provider + publishable key) for the browser. */
   config: () => api.get<PaymentConfigResponse>('/payments/config'),
   initiate: (body: PaymentInitiateRequest) =>
@@ -356,10 +320,6 @@ export const paymentService = {
   /** Confirm a hosted checkout (e.g. Razorpay) so the server can verify the signature. */
   verify: (body: PaymentVerifyRequest) =>
     api.post<PaymentResponse>('/payments/verify', body),
-=======
-  initiate: (body: PaymentInitiateRequest) =>
-    api.post<PaymentResponse>('/payments/initiate', body),
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   mine: () => api.get<PaymentResponse[]>('/payments/me'),
   getById: (id: number) => api.get<PaymentResponse>(`/payments/${id}`),
   forEvent: (eventId: number) =>
@@ -368,7 +328,6 @@ export const paymentService = {
   refund: (id: number) => api.post<PaymentResponse>(`/payments/${id}/refund`),
   /** Download a PDF receipt for a completed payment (payer, coordinator or admin). */
   receipt: (id: number) => api.getBlob(`/payments/${id}/receipt`),
-<<<<<<< HEAD
   /**
    * Download a ZIP of PDF receipts for several completed payments. The query string is built
    * by hand so the ids repeat as `ids=1&ids=2` (Spring's `@RequestParam List` form) rather than
@@ -376,8 +335,6 @@ export const paymentService = {
    */
   receiptsZip: (ids: number[]) =>
     api.getBlob(`/payments/receipts.zip?${ids.map((id) => `ids=${encodeURIComponent(id)}`).join('&')}`),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 };
 
 /* ------------------------------ competitions ---------------------------- */
@@ -392,11 +349,8 @@ export const competitionService = {
     api.get<LeaderboardEntry[]>(`/competitions/${id}/leaderboard`),
   create: (body: CompetitionRequest) =>
     api.post<CompetitionResponse>('/competitions', body),
-<<<<<<< HEAD
   /** Delete a competition and all of its rounds, judges and scores (coordinator only). */
   remove: (id: number) => api.delete<void>(`/competitions/${id}`),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   updateStatus: (id: number, body: UpdateCompetitionStatusRequest) =>
     api.patch<CompetitionResponse>(`/competitions/${id}/status`, body),
   addRound: (id: number, body: CompetitionRoundRequest) =>
@@ -509,11 +463,8 @@ export const feedbackService = {
     api.get<FeedbackResponse[]>(`/feedback/event/${eventId}`),
   summary: (eventId: number) =>
     api.get<FeedbackSummary>(`/feedback/event/${eventId}/summary`),
-<<<<<<< HEAD
   /** Remove a feedback entry — moderation for the event's club coordinator. */
   remove: (id: number) => api.delete<void>(`/feedback/${id}`),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 };
 
 /* ------------------------------ announcements --------------------------- */
@@ -521,14 +472,11 @@ export const feedbackService = {
 export const announcementService = {
   create: (body: AnnouncementRequest) =>
     api.post<AnnouncementResponse>('/announcements', body),
-<<<<<<< HEAD
   /** Edit an announcement's title/body/pinned flag (author or coordinator). */
   update: (
     id: number,
     body: Pick<AnnouncementRequest, 'title' | 'content' | 'pinned'>,
   ) => api.put<AnnouncementResponse>(`/announcements/${id}`, body),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   remove: (id: number) => api.delete<void>(`/announcements/${id}`),
   feed: () => api.get<AnnouncementResponse[]>('/announcements'),
   general: () => api.get<AnnouncementResponse[]>('/announcements/general'),
@@ -591,7 +539,6 @@ export const searchService = {
     api.get<GlobalSearchResponse>('/search', { params: clean({ q, limit }) }),
 };
 
-<<<<<<< HEAD
 /* -------------------------------- assistant ----------------------------- */
 
 export const assistantService = {
@@ -602,8 +549,6 @@ export const assistantService = {
     api.post<AssistantChatResponse>('/assistant/chat', body),
 };
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 /* -------------------------------- analytics ----------------------------- */
 
 export const analyticsService = {
@@ -629,15 +574,12 @@ export const notificationService = {
     api.get<Record<string, number>>('/notifications/me/unread-count'),
   markRead: (id: number) => api.post<void>(`/notifications/${id}/read`),
   markAllRead: () => api.post<void>('/notifications/read-all'),
-<<<<<<< HEAD
   /** Flip a notification back to unread. */
   markUnread: (id: number) => api.post<void>(`/notifications/${id}/unread`),
   /** Permanently delete a single notification. */
   remove: (id: number) => api.delete<void>(`/notifications/${id}`),
   /** Permanently delete every notification (clear inbox). */
   clearAll: () => api.delete<void>('/notifications/me'),
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   /** My email notification preferences. */
   preferences: () =>
     api.get<NotificationPreferenceResponse>('/notifications/preferences'),
@@ -649,7 +591,6 @@ export const notificationService = {
     api.post<void>('/notifications/unsubscribe', undefined, { params: { token } }),
 };
 
-<<<<<<< HEAD
 /* ------------------------------- volunteers -----------------------------
  * Volunteers are a club-scoped role. A club coordinator (or admin) adds an
  * existing user as a volunteer for their club — there is no public self-apply.
@@ -755,47 +696,6 @@ export const volunteerService = {
   /** Volunteer attendance for an event (coordinator/admin or active member). */
   attendanceForEvent: (eventId: number) =>
     api.get<VolunteerAttendanceResponse[]>(`/volunteers/events/${eventId}/attendance`),
-=======
-/* ------------------------------- volunteers ----------------------------- */
-
-export const volunteerService = {
-  /** Student applies to volunteer for an event (pending coordinator approval). */
-  apply: (body: VolunteerApplyRequest) =>
-    api.post<VolunteerResponse>('/volunteers/apply', body),
-  /** Coordinator/admin directly recruits an existing user by email (auto-approved). */
-  recruit: (eventId: number, body: RecruitVolunteerRequest) =>
-    api.post<VolunteerResponse>(`/volunteers/event/${eventId}/recruit`, body),
-  /** Coordinator/admin approves a pending volunteer, optionally overriding their role. */
-  approve: (volunteerId: number, role?: string) =>
-    api.post<VolunteerResponse>(
-      `/volunteers/${volunteerId}/approve`,
-      undefined,
-      { params: clean({ role }) },
-    ),
-  /** Remove a volunteer (coordinator/admin) or withdraw your own application. */
-  remove: (volunteerId: number) =>
-    api.delete<void>(`/volunteers/${volunteerId}`),
-  /** Full volunteer roster for an event (coordinator/admin). */
-  forEvent: (eventId: number) =>
-    api.get<VolunteerResponse[]>(`/volunteers/event/${eventId}`),
-  /** My own volunteer enrollments across all events. */
-  mine: () => api.get<VolunteerResponse[]>('/volunteers/me'),
-
-  /* -- tasks -- */
-  assignTask: (volunteerId: number, body: VolunteerTaskRequest) =>
-    api.post<VolunteerTaskResponse>(`/volunteers/${volunteerId}/tasks`, body),
-  tasksForVolunteer: (volunteerId: number) =>
-    api.get<VolunteerTaskResponse[]>(`/volunteers/${volunteerId}/tasks`),
-  tasksForEvent: (eventId: number) =>
-    api.get<VolunteerTaskResponse[]>(`/volunteers/event/${eventId}/tasks`),
-  myTasks: () => api.get<VolunteerTaskResponse[]>('/volunteers/me/tasks'),
-  updateTaskStatus: (taskId: number, status: TaskStatus) =>
-    api.patch<VolunteerTaskResponse>(`/volunteers/tasks/${taskId}/status`, {
-      status,
-    }),
-  removeTask: (taskId: number) =>
-    api.delete<void>(`/volunteers/tasks/${taskId}`),
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 };
 
 /* ---------------------------------- admin ------------------------------- */

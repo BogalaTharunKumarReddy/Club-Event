@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
-<<<<<<< HEAD
   Award,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Building2,
   CalendarCheck,
   CreditCard,
   Gauge,
-<<<<<<< HEAD
   ShieldCheck,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Ticket,
   Users,
   Wallet,
@@ -137,7 +131,6 @@ export default function AdminDashboardPage() {
           </div>
 
           {/* Quick links */}
-<<<<<<< HEAD
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <QuickLink to="/app/admin/users" icon={<Users className="h-5 w-5" />} title="Manage users" description="Roles, access & accounts" />
             <QuickLink to="/app/admin/clubs" icon={<Building2 className="h-5 w-5" />} title="Manage clubs" description="Activate or remove clubs" />
@@ -145,12 +138,6 @@ export default function AdminDashboardPage() {
             <QuickLink to="/app/admin/payments" icon={<CreditCard className="h-5 w-5" />} title="Payments" description="Transactions & refunds" />
             <QuickLink to="/app/admin/certificates" icon={<Award className="h-5 w-5" />} title="Certificate templates" description="Reusable certificate designs" />
             <QuickLink to="/app/admin/audit-log" icon={<ShieldCheck className="h-5 w-5" />} title="Audit log" description="Every administrative action" />
-=======
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <QuickLink to="/app/admin/users" icon={<Users className="h-5 w-5" />} title="Manage users" description="Roles, access & accounts" />
-            <QuickLink to="/app/admin/clubs" icon={<Building2 className="h-5 w-5" />} title="Manage clubs" description="Activate or remove clubs" />
-            <QuickLink to="/app/admin/events" icon={<CalendarCheck className="h-5 w-5" />} title="Manage events" description="Moderate every event" />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </div>
         </>
       )}

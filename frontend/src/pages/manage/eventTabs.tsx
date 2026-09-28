@@ -3,11 +3,7 @@
  * be mounted as standalone coordinator workspace pages (each backed by an event
  * picker). Every panel is self-contained and driven by the {@code eventId} prop.
  */
-<<<<<<< HEAD
 import { useEffect, useMemo, useRef, useState } from 'react';
-=======
-import { useEffect, useMemo, useState } from 'react';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { Link } from 'react-router-dom';
 import {
   Award,
@@ -15,20 +11,14 @@ import {
   CalendarClock,
   Check,
   CheckSquare,
-<<<<<<< HEAD
   ClipboardList,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   CreditCard,
   Download,
   HandHeart,
   Megaphone,
   Package,
   Palette,
-<<<<<<< HEAD
   Pencil,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Pin,
   Plus,
   QrCode,
@@ -67,23 +57,17 @@ import {
   volunteerService,
 } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
-<<<<<<< HEAD
 import { QrScanner } from '@/components/scan/QrScanner';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import {
   CERTIFICATE_SCOPE_LABELS,
   CERTIFICATE_TYPE_LABELS,
   EVENT_STATUS_LABELS,
-<<<<<<< HEAD
   VOLUNTEER_ASSIGNMENT_STATUS_LABELS,
   VOLUNTEER_ASSIGNMENT_STATUS_STYLES,
   VOLUNTEER_TASK_PRIORITY_LABELS,
   VOLUNTEER_TASK_PRIORITY_STYLES,
   VOLUNTEER_TASK_STATUS_LABELS,
   VOLUNTEER_TASK_STATUS_STYLES,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 } from '@/lib/constants';
 import {
   cn,
@@ -104,18 +88,11 @@ import {
   ErrorState,
   EventStatusBadge,
   Field,
-<<<<<<< HEAD
-=======
-  FullPageLoader,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Modal,
   Pagination,
   PaymentStatusBadge,
   RegistrationStatusBadge,
-<<<<<<< HEAD
   SectionLoader,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Select,
   TextArea,
   TextInput,
@@ -130,7 +107,6 @@ import type {
   CertificateResponse,
   CertificateTemplateRequest,
   CertificateType,
-<<<<<<< HEAD
   CompetitionResponse,
   EventScheduleRequest,
   EventScheduleResponse,
@@ -143,15 +119,6 @@ import type {
   VolunteerResponse,
   VolunteerTaskCreateRequest,
   VolunteerTaskPriority,
-=======
-  EventScheduleRequest,
-  EventStatus,
-  PaymentResponse,
-  RegistrationResponse,
-  TaskStatus,
-  VolunteerResponse,
-  VolunteerTaskResponse,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 } from '@/types';
 
 /* ------------------------------- overview ------------------------------ */
@@ -220,11 +187,7 @@ export function OverviewTab({
     }
   }
 
-<<<<<<< HEAD
   if (loading) return <SectionLoader />;
-=======
-  if (loading) return <FullPageLoader />;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (error || !stats) return <ErrorState message={error ?? 'No stats.'} onRetry={reload} />;
 
   const chartData = [
@@ -376,11 +339,7 @@ export function RegistrationsTab({ eventId }: { eventId: number }) {
     }
   }
 
-<<<<<<< HEAD
   if (loading) return <SectionLoader />;
-=======
-  if (loading) return <FullPageLoader />;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (error) return <ErrorState message={error} onRetry={reloadRegs} />;
   if (!data || data.content.length === 0) {
     return (
@@ -511,11 +470,8 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
   const [ticketCode, setTicketCode] = useState('');
   const [checkingIn, setCheckingIn] = useState(false);
   const [busyRegId, setBusyRegId] = useState<number | null>(null);
-<<<<<<< HEAD
   // Per-code debounce so a QR held in front of the camera isn't checked in repeatedly.
   const seenRef = useRef<Map<string, number>>(new Map());
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const attendedRegIds = useMemo(
     () => new Set((attendance ?? []).map((a) => a.registrationId)),
@@ -527,7 +483,6 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
     reloadRegs();
   }
 
-<<<<<<< HEAD
   // Check in one ticket. Shared by the camera scanner and the manual code form;
   // the backend resolves the event from the ticket and verifies club membership.
   async function runScanCode(raw: string) {
@@ -540,14 +495,6 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
     setCheckingIn(true);
     try {
       const res = await attendanceService.checkIn({ ticketCode: ticket });
-=======
-  async function submitCode(e: React.FormEvent) {
-    e.preventDefault();
-    if (!ticketCode.trim()) return;
-    setCheckingIn(true);
-    try {
-      const res = await attendanceService.checkIn({ ticketCode: ticketCode.trim() });
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       toast.success(`Checked in ${res.userName}.`);
       setTicketCode('');
       refreshAll();
@@ -558,14 +505,11 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
     }
   }
 
-<<<<<<< HEAD
   function submitCode(e: React.FormEvent) {
     e.preventDefault();
     void runScanCode(ticketCode);
   }
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   async function manualCheckIn(registrationId: number, name: string) {
     setBusyRegId(registrationId);
     try {
@@ -623,12 +567,9 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Scan the attendee's QR (it contains only the opaque ticket code) or type it in.
           </p>
-<<<<<<< HEAD
           <div className="mt-4">
             <QrScanner onDetected={runScanCode} paused={checkingIn} />
           </div>
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           <form onSubmit={submitCode} className="mt-4 flex gap-2">
             <TextInput
               value={ticketCode}
@@ -647,11 +588,7 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
             <Users className="h-4 w-4 text-brand-600" /> Manual check-in
           </h3>
           {regsLoading ? (
-<<<<<<< HEAD
             <SectionLoader />
-=======
-            <FullPageLoader />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           ) : pendingRegs.length === 0 ? (
             <p className="text-sm text-slate-400">Everyone active has been checked in.</p>
           ) : (
@@ -695,11 +632,7 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
           )}
         </div>
         {attLoading ? (
-<<<<<<< HEAD
           <SectionLoader />
-=======
-          <FullPageLoader />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         ) : !attendance || attendance.length === 0 ? (
           <p className="text-sm text-slate-400">No check-ins yet.</p>
         ) : (
@@ -742,7 +675,6 @@ export function AttendanceTab({ eventId }: { eventId: number }) {
 
 export function ScheduleTab({ eventId }: { eventId: number }) {
   const { data, loading, error, reload } = useQuery(() => eventService.schedule(eventId), [eventId]);
-<<<<<<< HEAD
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<EventScheduleResponse | null>(null);
   const [toDelete, setToDelete] = useState<number | null>(null);
@@ -757,11 +689,6 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
     setModalOpen(true);
   }
 
-=======
-  const [addOpen, setAddOpen] = useState(false);
-  const [toDelete, setToDelete] = useState<number | null>(null);
-
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   const items = useMemo(
     () =>
       [...(data ?? [])].sort(
@@ -785,21 +712,13 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
   return (
     <div>
       <div className="mb-4 flex justify-end">
-<<<<<<< HEAD
         <Button onClick={openAdd}>
-=======
-        <Button onClick={() => setAddOpen(true)}>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           <Plus className="h-4 w-4" /> Add item
         </Button>
       </div>
 
       {loading ? (
-<<<<<<< HEAD
         <SectionLoader />
-=======
-        <FullPageLoader />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       ) : error ? (
         <ErrorState message={error} onRetry={reload} />
       ) : items.length === 0 ? (
@@ -808,11 +727,7 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
           title="No schedule yet"
           description="Add sessions, talks or breaks to build the agenda."
           action={
-<<<<<<< HEAD
             <Button onClick={openAdd}>
-=======
-            <Button onClick={() => setAddOpen(true)}>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
               <Plus className="h-4 w-4" /> Add the first item
             </Button>
           }
@@ -843,7 +758,6 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
                       <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{s.description}</p>
                     )}
                   </div>
-<<<<<<< HEAD
                   <div className="flex shrink-0 items-center gap-1">
                     <Button
                       variant="ghost"
@@ -862,16 +776,6 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
-=======
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setToDelete(s.id)}
-                    aria-label="Remove item"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                 </div>
               </div>
             </li>
@@ -879,7 +783,6 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
         </ol>
       )}
 
-<<<<<<< HEAD
       <ScheduleModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -887,14 +790,6 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
         editing={editing}
         onSaved={() => {
           setModalOpen(false);
-=======
-      <AddScheduleModal
-        open={addOpen}
-        onClose={() => setAddOpen(false)}
-        eventId={eventId}
-        onAdded={() => {
-          setAddOpen(false);
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           reload();
         }}
       />
@@ -912,36 +807,23 @@ export function ScheduleTab({ eventId }: { eventId: number }) {
   );
 }
 
-<<<<<<< HEAD
 function ScheduleModal({
   open,
   onClose,
   eventId,
   editing,
   onSaved,
-=======
-function AddScheduleModal({
-  open,
-  onClose,
-  eventId,
-  onAdded,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }: {
   open: boolean;
   onClose: () => void;
   eventId: number;
-<<<<<<< HEAD
   editing?: EventScheduleResponse | null;
   onSaved: () => void;
-=======
-  onAdded: () => void;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }) {
   const empty: EventScheduleRequest = { title: '', startDateTime: '' };
   const [form, setForm] = useState<EventScheduleRequest>(empty);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-<<<<<<< HEAD
   const isEdit = !!editing;
 
   // Seed the form when the modal opens: from the item being edited, or blank for
@@ -964,8 +846,6 @@ function AddScheduleModal({
     setErr(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, editing]);
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   function set<K extends keyof EventScheduleRequest>(key: K, value: EventScheduleRequest[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -978,7 +858,6 @@ function AddScheduleModal({
     }
     setBusy(true);
     setErr(null);
-<<<<<<< HEAD
     const body: EventScheduleRequest = {
       title: form.title.trim(),
       startDateTime: form.startDateTime,
@@ -1000,23 +879,6 @@ function AddScheduleModal({
       onSaved();
     } catch (e) {
       setErr(errorMessage(e, 'Could not save item.'));
-=======
-    try {
-      await eventService.addSchedule(eventId, {
-        title: form.title.trim(),
-        startDateTime: form.startDateTime,
-        endDateTime: form.endDateTime || undefined,
-        description: form.description || undefined,
-        speaker: form.speaker || undefined,
-        venue: form.venue || undefined,
-        dayNumber: form.dayNumber || undefined,
-      });
-      toast.success('Schedule item added.');
-      setForm(empty);
-      onAdded();
-    } catch (e) {
-      setErr(errorMessage(e, 'Could not add item.'));
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     } finally {
       setBusy(false);
     }
@@ -1026,22 +888,14 @@ function AddScheduleModal({
     <Modal
       open={open}
       onClose={busy ? () => undefined : onClose}
-<<<<<<< HEAD
       title={isEdit ? 'Edit schedule item' : 'Add schedule item'}
-=======
-      title="Add schedule item"
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       footer={
         <>
           <Button variant="secondary" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
           <Button onClick={submit} loading={busy}>
-<<<<<<< HEAD
             {isEdit ? 'Save changes' : 'Add item'}
-=======
-            Add item
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </Button>
         </>
       }
@@ -1121,7 +975,6 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
     [eventId],
   );
   const [createOpen, setCreateOpen] = useState(false);
-<<<<<<< HEAD
   const [toDelete, setToDelete] = useState<CompetitionResponse | null>(null);
 
   async function confirmDelete() {
@@ -1136,8 +989,6 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
       throw err;
     }
   }
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   return (
     <div>
@@ -1148,11 +999,7 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
       </div>
 
       {loading ? (
-<<<<<<< HEAD
         <SectionLoader />
-=======
-        <FullPageLoader />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       ) : error ? (
         <ErrorState message={error} onRetry={reload} />
       ) : !data || data.length === 0 ? (
@@ -1169,11 +1016,7 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {data.map((c) => (
-<<<<<<< HEAD
             <div key={c.id} className="card flex flex-col p-5">
-=======
-            <Link key={c.id} to={`/app/manage/competitions/${c.id}`} className="card block p-5 transition hover:shadow-md">
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
               <div className="flex items-start justify-between gap-3">
                 <h4 className="font-semibold text-slate-900 dark:text-slate-100">{c.title}</h4>
                 <CompetitionStatusBadge status={c.status} />
@@ -1187,7 +1030,6 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
                 {c.teamBased ? 'Team-based' : 'Individual'} · {c.roundCount} round
                 {c.roundCount === 1 ? '' : 's'} · {c.judgeCount} judge{c.judgeCount === 1 ? '' : 's'}
               </p>
-<<<<<<< HEAD
               <div className="mt-4 flex items-center gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
                 <Link to={`/app/manage/competitions/${c.id}`} className="btn-secondary text-sm">
                   Manage
@@ -1203,9 +1045,6 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
                 </Button>
               </div>
             </div>
-=======
-            </Link>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           ))}
         </div>
       )}
@@ -1220,7 +1059,6 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
           reload();
         }}
       />
-<<<<<<< HEAD
 
       <ConfirmDialog
         open={!!toDelete}
@@ -1231,8 +1069,6 @@ export function CompetitionsTab({ eventId, teamEvent }: { eventId: number; teamE
         confirmLabel="Delete"
         danger
       />
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     </div>
   );
 }
@@ -1580,11 +1416,7 @@ export function CertificatesTab({ eventId }: { eventId: number }) {
       {/* Issued list */}
       <div className="lg:col-span-2">
         {loading ? (
-<<<<<<< HEAD
           <SectionLoader />
-=======
-          <FullPageLoader />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         ) : error ? (
           <ErrorState message={error} onRetry={reload} />
         ) : !data || data.length === 0 ? (
@@ -1860,11 +1692,7 @@ function CertificateParticipantPicker({
       <div className="max-h-[46vh] overflow-y-auto rounded-lg border border-slate-200 dark:border-slate-800">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-<<<<<<< HEAD
             <SectionLoader />
-=======
-            <FullPageLoader />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </div>
         ) : error ? (
           <div className="p-4">
@@ -1954,12 +1782,8 @@ function CertificateParticipantPicker({
 /* ---------------------------- announcements ---------------------------- */
 
 export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eventTitle: string }) {
-<<<<<<< HEAD
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<AnnouncementResponse | null>(null);
-=======
-  const [createOpen, setCreateOpen] = useState(false);
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   const [toDelete, setToDelete] = useState<AnnouncementResponse | null>(null);
 
   const { data, loading, error, reload } = useQuery(
@@ -1976,7 +1800,6 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
     [data],
   );
 
-<<<<<<< HEAD
   function openCreate() {
     setEditing(null);
     setModalOpen(true);
@@ -1987,8 +1810,6 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
     setModalOpen(true);
   }
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   async function confirmDelete() {
     if (!toDelete) return;
     try {
@@ -2004,21 +1825,13 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
   return (
     <div>
       <div className="mb-4 flex justify-end">
-<<<<<<< HEAD
         <Button onClick={openCreate}>
-=======
-        <Button onClick={() => setCreateOpen(true)}>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           <Plus className="h-4 w-4" /> New announcement
         </Button>
       </div>
 
       {loading ? (
-<<<<<<< HEAD
         <SectionLoader />
-=======
-        <FullPageLoader />
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       ) : error ? (
         <ErrorState message={error} onRetry={reload} />
       ) : announcements.length === 0 ? (
@@ -2027,11 +1840,7 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
           title="No announcements yet"
           description="Post updates to everyone registered for this event."
           action={
-<<<<<<< HEAD
             <Button onClick={openCreate}>
-=======
-            <Button onClick={() => setCreateOpen(true)}>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
               <Plus className="h-4 w-4" /> Post the first one
             </Button>
           }
@@ -2053,7 +1862,6 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
                     {a.authorName} · {fromNow(a.createdAt)}
                   </p>
                 </div>
-<<<<<<< HEAD
                 <div className="flex shrink-0 items-center gap-1">
                   <Button
                     variant="ghost"
@@ -2072,23 +1880,12 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
-=======
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setToDelete(a)}
-                  aria-label="Delete announcement"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
               </div>
             </li>
           ))}
         </ul>
       )}
 
-<<<<<<< HEAD
       <EventAnnouncementModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -2097,15 +1894,6 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
         editing={editing}
         onSaved={() => {
           setModalOpen(false);
-=======
-      <CreateEventAnnouncementModal
-        open={createOpen}
-        onClose={() => setCreateOpen(false)}
-        eventId={eventId}
-        eventTitle={eventTitle}
-        onCreated={() => {
-          setCreateOpen(false);
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           reload();
         }}
       />
@@ -2123,42 +1911,28 @@ export function AnnouncementsTab({ eventId, eventTitle }: { eventId: number; eve
   );
 }
 
-<<<<<<< HEAD
 function EventAnnouncementModal({
-=======
-function CreateEventAnnouncementModal({
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   open,
   onClose,
   eventId,
   eventTitle,
-<<<<<<< HEAD
   editing,
   onSaved,
-=======
-  onCreated,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }: {
   open: boolean;
   onClose: () => void;
   eventId: number;
   eventTitle: string;
-<<<<<<< HEAD
   editing?: AnnouncementResponse | null;
   onSaved: () => void;
 }) {
   const isEdit = !!editing;
-=======
-  onCreated: () => void;
-}) {
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [pinned, setPinned] = useState(false);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
-<<<<<<< HEAD
   useEffect(() => {
     if (!open) return;
     setErr(null);
@@ -2173,8 +1947,6 @@ function CreateEventAnnouncementModal({
     }
   }, [open, editing]);
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   async function submit() {
     if (!title.trim() || !content.trim()) {
       setErr('Title and content are required.');
@@ -2183,7 +1955,6 @@ function CreateEventAnnouncementModal({
     setBusy(true);
     setErr(null);
     try {
-<<<<<<< HEAD
       if (editing) {
         await announcementService.update(editing.id, {
           title: title.trim(),
@@ -2209,22 +1980,6 @@ function CreateEventAnnouncementModal({
           isEdit ? 'Could not update announcement.' : 'Could not post announcement.',
         ),
       );
-=======
-      await announcementService.create({
-        scope: 'EVENT',
-        eventId,
-        title: title.trim(),
-        content: content.trim(),
-        pinned,
-      });
-      toast.success('Announcement posted.');
-      setTitle('');
-      setContent('');
-      setPinned(false);
-      onCreated();
-    } catch (e) {
-      setErr(errorMessage(e, 'Could not post announcement.'));
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     } finally {
       setBusy(false);
     }
@@ -2234,22 +1989,14 @@ function CreateEventAnnouncementModal({
     <Modal
       open={open}
       onClose={busy ? () => undefined : onClose}
-<<<<<<< HEAD
       title={`${isEdit ? 'Edit announcement' : 'New announcement'} · ${eventTitle}`}
-=======
-      title={`New announcement · ${eventTitle}`}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       footer={
         <>
           <Button variant="secondary" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
           <Button onClick={submit} loading={busy}>
-<<<<<<< HEAD
             {isEdit ? 'Save changes' : 'Post announcement'}
-=======
-            Post announcement
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </Button>
         </>
       }
@@ -2290,11 +2037,7 @@ function CreateEventAnnouncementModal({
 /* ------------------------------- feedback ------------------------------ */
 
 export function FeedbackTab({ eventId }: { eventId: number }) {
-<<<<<<< HEAD
   const { data: summary, loading: summaryLoading, reload: reloadSummary } = useQuery(
-=======
-  const { data: summary, loading: summaryLoading } = useQuery(
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     () => feedbackService.summary(eventId),
     [eventId],
   );
@@ -2302,7 +2045,6 @@ export function FeedbackTab({ eventId }: { eventId: number }) {
     () => feedbackService.forEvent(eventId),
     [eventId],
   );
-<<<<<<< HEAD
   const [toDelete, setToDelete] = useState<FeedbackResponse | null>(null);
 
   async function confirmDelete() {
@@ -2319,10 +2061,6 @@ export function FeedbackTab({ eventId }: { eventId: number }) {
   }
 
   if (summaryLoading || listLoading) return <SectionLoader />;
-=======
-
-  if (summaryLoading || listLoading) return <FullPageLoader />;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (error) return <ErrorState message={error} onRetry={reload} />;
 
   const total = summary?.totalResponses ?? 0;
@@ -2331,12 +2069,8 @@ export function FeedbackTab({ eventId }: { eventId: number }) {
     : 1;
 
   return (
-<<<<<<< HEAD
     <>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-=======
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       {/* Summary */}
       <div className="lg:col-span-1">
         <div className="card p-6">
@@ -2401,7 +2135,6 @@ export function FeedbackTab({ eventId }: { eventId: number }) {
                       />
                     ))}
                   </div>
-<<<<<<< HEAD
                   <Button
                     variant="ghost"
                     size="sm"
@@ -2410,8 +2143,6 @@ export function FeedbackTab({ eventId }: { eventId: number }) {
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                 </div>
                 {f.comment && (
                   <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">{f.comment}</p>
@@ -2427,7 +2158,6 @@ export function FeedbackTab({ eventId }: { eventId: number }) {
           </ul>
         )}
       </div>
-<<<<<<< HEAD
       </div>
       <ConfirmDialog
         open={!!toDelete}
@@ -2439,9 +2169,6 @@ export function FeedbackTab({ eventId }: { eventId: number }) {
         danger
       />
     </>
-=======
-    </div>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   );
 }
 
@@ -2454,11 +2181,8 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
   );
   const [toRefund, setToRefund] = useState<PaymentResponse | null>(null);
   const [receiptId, setReceiptId] = useState<number | null>(null);
-<<<<<<< HEAD
   const [selected, setSelected] = useState<Set<number>>(new Set());
   const [zipping, setZipping] = useState(false);
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   async function confirmRefund() {
     if (!toRefund) return;
@@ -2484,7 +2208,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
     }
   }
 
-<<<<<<< HEAD
   function toggleOne(id: number) {
     setSelected((prev) => {
       const next = new Set(prev);
@@ -2508,9 +2231,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
   }
 
   if (loading) return <SectionLoader />;
-=======
-  if (loading) return <FullPageLoader />;
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (error) return <ErrorState message={error} onRetry={reload} />;
 
   const payments = data ?? [];
@@ -2521,7 +2241,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
     .filter((p) => p.status === 'REFUNDED')
     .reduce((sum, p) => sum + p.amount, 0);
 
-<<<<<<< HEAD
   // Only completed payments (paid or refunded) have a downloadable receipt.
   const receiptable = payments.filter((p) => p.status === 'SUCCESS' || p.status === 'REFUNDED');
   const allSelected = receiptable.length > 0 && receiptable.every((p) => selected.has(p.id));
@@ -2537,8 +2256,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
     });
   }
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (payments.length === 0) {
     return (
       <EmptyState
@@ -2561,7 +2278,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
         <StatCard label="Transactions" value={payments.length} />
       </div>
 
-<<<<<<< HEAD
       {selected.size > 0 && (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand-200 bg-brand-50 px-4 py-3 dark:border-brand-900/50 dark:bg-brand-900/20">
           <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
@@ -2578,13 +2294,10 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
         </div>
       )}
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
         <table className="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-700">
           <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500 dark:bg-slate-800 dark:text-slate-400">
             <tr>
-<<<<<<< HEAD
               <th className="px-4 py-3">
                 <input
                   type="checkbox"
@@ -2595,8 +2308,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
                   aria-label="Select every receipt"
                 />
               </th>
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
               <th className="px-4 py-3">Payer</th>
               <th className="px-4 py-3">Amount</th>
               <th className="px-4 py-3">Status</th>
@@ -2609,7 +2320,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
             {payments.map((p) => (
               <tr key={p.id} className="bg-white dark:bg-slate-900">
                 <td className="px-4 py-3">
-<<<<<<< HEAD
                   {(p.status === 'SUCCESS' || p.status === 'REFUNDED') && (
                     <input
                       type="checkbox"
@@ -2621,8 +2331,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
                   )}
                 </td>
                 <td className="px-4 py-3">
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                   <div className="flex items-center gap-2">
                     <Avatar name={p.userName} size="sm" />
                     <span className="font-medium text-slate-900 dark:text-slate-100">{p.userName}</span>
@@ -2689,7 +2397,6 @@ export function PaymentsTab({ eventId }: { eventId: number }) {
 
 /* ------------------------------ volunteers ----------------------------- */
 
-<<<<<<< HEAD
 /**
  * Event-scoped volunteer panel.
  *
@@ -2748,126 +2455,10 @@ export function VolunteersTab({ eventId }: { eventId: number }) {
       reload();
     } catch (err) {
       toast.error(errorMessage(err, 'Could not cancel the assignment.'));
-=======
-const TASK_STATUS_META: Record<TaskStatus, { label: string; className: string }> = {
-  PENDING: {
-    label: 'Pending',
-    className: 'bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300',
-  },
-  IN_PROGRESS: {
-    label: 'In progress',
-    className: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
-  },
-  COMPLETED: {
-    label: 'Completed',
-    className: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
-  },
-};
-
-/** Advance a task through the PENDING → IN_PROGRESS → COMPLETED → PENDING cycle. */
-function nextTaskStatus(status: TaskStatus): TaskStatus {
-  if (status === 'PENDING') return 'IN_PROGRESS';
-  if (status === 'IN_PROGRESS') return 'COMPLETED';
-  return 'PENDING';
-}
-
-export function VolunteersTab({ eventId }: { eventId: number }) {
-  const { data: volunteers, loading, error, reload } = useQuery(
-    () => volunteerService.forEvent(eventId),
-    [eventId],
-  );
-  const { data: tasks, reload: reloadTasks } = useQuery(
-    () => volunteerService.tasksForEvent(eventId),
-    [eventId],
-  );
-
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
-  const [recruiting, setRecruiting] = useState(false);
-  const [busyId, setBusyId] = useState<number | null>(null);
-  const [busyTaskId, setBusyTaskId] = useState<number | null>(null);
-  const [assignTo, setAssignTo] = useState<VolunteerResponse | null>(null);
-  const [toRemove, setToRemove] = useState<VolunteerResponse | null>(null);
-  const [toRemoveTask, setToRemoveTask] = useState<VolunteerTaskResponse | null>(null);
-
-  const tasksByVolunteer = useMemo(() => {
-    const map = new Map<number, VolunteerTaskResponse[]>();
-    for (const t of tasks ?? []) {
-      const list = map.get(t.volunteerId) ?? [];
-      list.push(t);
-      map.set(t.volunteerId, list);
-    }
-    return map;
-  }, [tasks]);
-
-  function refreshAll() {
-    reload();
-    reloadTasks();
-  }
-
-  async function recruit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.trim()) {
-      toast.error('Enter the volunteer’s email.');
-      return;
-    }
-    setRecruiting(true);
-    try {
-      await volunteerService.recruit(eventId, {
-        email: email.trim(),
-        role: role.trim() || undefined,
-      });
-      toast.success('Volunteer added.');
-      setEmail('');
-      setRole('');
-      refreshAll();
-    } catch (err) {
-      toast.error(errorMessage(err, 'Could not add volunteer.'));
-    } finally {
-      setRecruiting(false);
-    }
-  }
-
-  async function approve(v: VolunteerResponse) {
-    setBusyId(v.id);
-    try {
-      await volunteerService.approve(v.id);
-      toast.success(`${v.userName} approved.`);
-      refreshAll();
-    } catch (err) {
-      toast.error(errorMessage(err, 'Could not approve volunteer.'));
-    } finally {
-      setBusyId(null);
-    }
-  }
-
-  async function cycleTaskStatus(task: VolunteerTaskResponse) {
-    setBusyTaskId(task.id);
-    try {
-      await volunteerService.updateTaskStatus(task.id, nextTaskStatus(task.status));
-      reloadTasks();
-      reload();
-    } catch (err) {
-      toast.error(errorMessage(err, 'Could not update the task.'));
-    } finally {
-      setBusyTaskId(null);
-    }
-  }
-
-  async function confirmRemove() {
-    if (!toRemove) return;
-    try {
-      await volunteerService.remove(toRemove.id);
-      toast.success('Volunteer removed.');
-      refreshAll();
-    } catch (err) {
-      toast.error(errorMessage(err, 'Could not remove volunteer.'));
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       throw err;
     }
   }
 
-<<<<<<< HEAD
   return (
     <div className="space-y-8">
       {/* Assignments */}
@@ -3045,192 +2636,10 @@ export function VolunteersTab({ eventId }: { eventId: number }) {
         onSaved={() => {
           setTaskOpen(false);
           reloadTasks();
-=======
-  async function confirmRemoveTask() {
-    if (!toRemoveTask) return;
-    try {
-      await volunteerService.removeTask(toRemoveTask.id);
-      toast.success('Task deleted.');
-      refreshAll();
-    } catch (err) {
-      toast.error(errorMessage(err, 'Could not delete the task.'));
-      throw err;
-    }
-  }
-
-  const pendingCount = (volunteers ?? []).filter((v) => !v.approved).length;
-
-  return (
-    <div className="space-y-6">
-      {/* Recruit */}
-      <form onSubmit={recruit} className="card flex flex-col gap-3 p-5 sm:flex-row sm:items-end">
-        <Field
-          label="Recruit a volunteer by email"
-          htmlFor="vol-email"
-          className="flex-1"
-          hint="They must already have an account."
-        >
-          <TextInput
-            id="vol-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="student@college.edu"
-          />
-        </Field>
-        <Field label="Role" htmlFor="vol-role" className="sm:w-52">
-          <TextInput
-            id="vol-role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            placeholder="e.g. Registration desk"
-          />
-        </Field>
-        <Button type="submit" loading={recruiting}>
-          <UserPlus className="h-4 w-4" /> Add
-        </Button>
-      </form>
-
-      {loading ? (
-        <FullPageLoader />
-      ) : error ? (
-        <ErrorState message={error} onRetry={reload} />
-      ) : !volunteers || volunteers.length === 0 ? (
-        <EmptyState
-          icon={<HandHeart className="h-6 w-6" />}
-          title="No volunteers yet"
-          description="Recruit volunteers by email above, or approve students who apply from the event page."
-        />
-      ) : (
-        <>
-          {pendingCount > 0 && (
-            <p className="text-sm font-medium text-amber-600 dark:text-amber-400">
-              {pendingCount} application{pendingCount === 1 ? '' : 's'} awaiting approval.
-            </p>
-          )}
-          <ul className="space-y-3">
-            {volunteers.map((v) => {
-              const vTasks = tasksByVolunteer.get(v.id) ?? [];
-              return (
-                <li key={v.id} className="card p-5">
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <Avatar name={v.userName} size="md" />
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <p className="font-medium text-slate-900 dark:text-slate-100">
-                            {v.userName}
-                          </p>
-                          {v.approved ? (
-                            <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
-                              Approved
-                            </Badge>
-                          ) : (
-                            <Badge className="bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-                              Pending
-                            </Badge>
-                          )}
-                        </div>
-                        <p className="text-xs text-slate-400">
-                          {v.userEmail}
-                          {v.role ? ` · ${v.role}` : ''}
-                        </p>
-                        {v.approved && (
-                          <p className="mt-0.5 text-xs text-slate-400">
-                            {v.completedTaskCount}/{v.taskCount} task
-                            {v.taskCount === 1 ? '' : 's'} done
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {!v.approved && (
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          loading={busyId === v.id}
-                          onClick={() => approve(v)}
-                        >
-                          <Check className="h-4 w-4" /> Approve
-                        </Button>
-                      )}
-                      {v.approved && (
-                        <Button size="sm" variant="secondary" onClick={() => setAssignTo(v)}>
-                          <Plus className="h-4 w-4" /> Task
-                        </Button>
-                      )}
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => setToRemove(v)}
-                        aria-label={`Remove ${v.userName}`}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-
-                  {vTasks.length > 0 && (
-                    <ul className="mt-4 space-y-2 border-t border-slate-100 pt-4 dark:border-slate-800">
-                      {vTasks.map((t) => {
-                        const meta = TASK_STATUS_META[t.status];
-                        return (
-                          <li key={t.id} className="flex items-start gap-2.5">
-                            <button
-                              type="button"
-                              disabled={busyTaskId === t.id}
-                              onClick={() => cycleTaskStatus(t)}
-                              className={cn(
-                                'mt-0.5 shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium transition disabled:opacity-50',
-                                meta.className,
-                              )}
-                              title="Click to advance status"
-                            >
-                              {meta.label}
-                            </button>
-                            <div className="min-w-0 flex-1">
-                              <p className="text-sm text-slate-700 dark:text-slate-200">{t.title}</p>
-                              {t.description && (
-                                <p className="text-xs text-slate-400">{t.description}</p>
-                              )}
-                              {t.dueAt && (
-                                <p className="flex items-center gap-1 text-xs text-slate-400">
-                                  <CalendarClock className="h-3 w-3" /> Due {formatDateTime(t.dueAt)}
-                                </p>
-                              )}
-                            </div>
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              onClick={() => setToRemoveTask(t)}
-                              aria-label="Delete task"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      )}
-
-      <AssignVolunteerTaskModal
-        volunteer={assignTo}
-        onClose={() => setAssignTo(null)}
-        onAssigned={() => {
-          setAssignTo(null);
-          refreshAll();
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         }}
       />
 
       <ConfirmDialog
-<<<<<<< HEAD
         open={toCancel != null}
         onClose={() => setToCancel(null)}
         onConfirm={confirmCancel}
@@ -3241,35 +2650,12 @@ export function VolunteersTab({ eventId }: { eventId: number }) {
             : ''
         }
         confirmLabel="Cancel assignment"
-=======
-        open={!!toRemove}
-        onClose={() => setToRemove(null)}
-        onConfirm={confirmRemove}
-        title="Remove this volunteer?"
-        message={
-          toRemove
-            ? `${toRemove.userName} will be removed from the volunteer roster and all their assigned tasks deleted.`
-            : ''
-        }
-        confirmLabel="Remove"
-        danger
-      />
-
-      <ConfirmDialog
-        open={!!toRemoveTask}
-        onClose={() => setToRemoveTask(null)}
-        onConfirm={confirmRemoveTask}
-        title="Delete this task?"
-        message="This permanently removes the task from the volunteer."
-        confirmLabel="Delete"
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         danger
       />
     </div>
   );
 }
 
-<<<<<<< HEAD
 function AssignVolunteerModal({
   open,
   onClose,
@@ -3520,51 +2906,6 @@ function VolunteerTaskModal({
       onSaved();
     } catch (e) {
       setErr(errorMessage(e, 'Could not create the task.'));
-=======
-function AssignVolunteerTaskModal({
-  volunteer,
-  onClose,
-  onAssigned,
-}: {
-  volunteer: VolunteerResponse | null;
-  onClose: () => void;
-  onAssigned: () => void;
-}) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueAt, setDueAt] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [err, setErr] = useState<string | null>(null);
-
-  // Reset the form whenever the modal opens for a different volunteer.
-  useEffect(() => {
-    if (volunteer) {
-      setTitle('');
-      setDescription('');
-      setDueAt('');
-      setErr(null);
-    }
-  }, [volunteer]);
-
-  async function submit() {
-    if (!volunteer) return;
-    if (!title.trim()) {
-      setErr('Task title is required.');
-      return;
-    }
-    setBusy(true);
-    setErr(null);
-    try {
-      await volunteerService.assignTask(volunteer.id, {
-        title: title.trim(),
-        description: description.trim() || undefined,
-        dueAt: dueAt || undefined,
-      });
-      toast.success('Task assigned.');
-      onAssigned();
-    } catch (e) {
-      setErr(errorMessage(e, 'Could not assign the task.'));
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     } finally {
       setBusy(false);
     }
@@ -3572,32 +2913,21 @@ function AssignVolunteerTaskModal({
 
   return (
     <Modal
-<<<<<<< HEAD
       open={open}
       onClose={busy ? () => undefined : onClose}
       title="Add a volunteer task"
-=======
-      open={!!volunteer}
-      onClose={busy ? () => undefined : onClose}
-      title={volunteer ? `Assign task · ${volunteer.userName}` : 'Assign task'}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       footer={
         <>
           <Button variant="secondary" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
           <Button onClick={submit} loading={busy}>
-<<<<<<< HEAD
             Create task
-=======
-            Assign task
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           </Button>
         </>
       }
     >
       <div className="space-y-4">
-<<<<<<< HEAD
         <Field label="Volunteer" htmlFor="tsk-vol" required>
           <Select
             id="tsk-vol"
@@ -3680,31 +3010,6 @@ function AssignVolunteerTaskModal({
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
             placeholder="Any step-by-step detail for the volunteer"
-=======
-        <Field label="Title" htmlFor="vtask-title" required>
-          <TextInput
-            id="vtask-title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="e.g. Manage the registration desk"
-            autoFocus
-          />
-        </Field>
-        <Field label="Description" htmlFor="vtask-desc">
-          <TextArea
-            id="vtask-desc"
-            rows={3}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </Field>
-        <Field label="Due" htmlFor="vtask-due">
-          <TextInput
-            id="vtask-due"
-            type="datetime-local"
-            value={dueAt}
-            onChange={(e) => setDueAt(e.target.value)}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           />
         </Field>
         {err && <p className="field-error">{err}</p>}

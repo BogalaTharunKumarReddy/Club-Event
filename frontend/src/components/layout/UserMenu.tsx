@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
 import { ChevronDown, LogOut, ShieldCheck, Ticket, User as UserIcon } from 'lucide-react';
-=======
-import { ChevronDown, LayoutDashboard, LogOut, ShieldCheck, Ticket, User as UserIcon } from 'lucide-react';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { useAuth } from '@/context/AuthContext';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { disconnectWs } from '@/lib/ws';
@@ -60,18 +56,6 @@ export function UserMenu() {
             <MenuLink to="/app/my-events" icon={<Ticket className="h-4 w-4" />} onClick={() => setOpen(false)}>
               My events
             </MenuLink>
-<<<<<<< HEAD
-=======
-            {hasRole('CLUB_COORDINATOR') && (
-              <MenuLink
-                to="/app/manage"
-                icon={<LayoutDashboard className="h-4 w-4" />}
-                onClick={() => setOpen(false)}
-              >
-                Coordinator dashboard
-              </MenuLink>
-            )}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             {hasRole('ADMIN') && (
               <MenuLink
                 to="/app/admin"

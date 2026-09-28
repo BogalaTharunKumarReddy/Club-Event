@@ -9,10 +9,7 @@ export { FullPageLoader } from './FullPageLoader';
 export { Modal } from './Modal';
 export { PageHeader } from './PageHeader';
 export { Pagination } from './Pagination';
-<<<<<<< HEAD
 export { SectionLoader } from './SectionLoader';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 export { Skeleton, SkeletonCards } from './Skeleton';
 export { Spinner } from './Spinner';
 export {

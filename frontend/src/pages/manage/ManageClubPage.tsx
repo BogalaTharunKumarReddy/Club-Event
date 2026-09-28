@@ -7,30 +7,20 @@ import {
   ArrowLeft,
   Check,
   Crown,
-<<<<<<< HEAD
   HandHeart,
   Megaphone,
   Pin,
   Plus,
   RotateCcw,
-=======
-  Megaphone,
-  Pin,
-  Plus,
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Save,
   Settings2,
   Trash2,
   UserCheck,
-<<<<<<< HEAD
   UserPlus,
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Users2,
   X,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-<<<<<<< HEAD
 import { announcementService, clubService, volunteerService } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
 import { useAuth } from '@/context/AuthContext';
@@ -42,13 +32,6 @@ import {
 } from '@/lib/constants';
 import { cn, errorMessage, formatDate, fromNow } from '@/lib/utils';
 import { optionalImageUrl } from '@/lib/validation';
-=======
-import { announcementService, clubService } from '@/lib/services';
-import { useQuery } from '@/hooks/useApi';
-import { useAuth } from '@/context/AuthContext';
-import { EVENT_CATEGORIES, MEMBERSHIP_STATUS_LABELS } from '@/lib/constants';
-import { cn, errorMessage, formatDate, fromNow } from '@/lib/utils';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { PageContainer } from '@/components/layout/RootLayout';
 import {
   Avatar,
@@ -65,7 +48,6 @@ import {
   TextArea,
   TextInput,
 } from '@/components/ui';
-<<<<<<< HEAD
 import type {
   AnnouncementResponse,
   ClubMemberResponse,
@@ -76,12 +58,6 @@ import { ImageUpload } from '@/components/domain/ImageUpload';
 import { AddVolunteerModal } from '@/components/domain/AddVolunteerModal';
 
 type Tab = 'details' | 'members' | 'volunteers' | 'announcements';
-=======
-import type { AnnouncementResponse, ClubMemberResponse, ClubRequest } from '@/types';
-import { ImageUpload } from '@/components/domain/ImageUpload';
-
-type Tab = 'details' | 'members' | 'announcements';
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
 export default function ManageClubPage() {
   const { clubId: clubIdParam } = useParams();
@@ -125,27 +101,17 @@ export default function ManageClubPage() {
   const tabs: Array<{ key: Tab; label: string; icon: React.ReactNode; badge?: number }> = [
     { key: 'details', label: 'Details', icon: <Settings2 className="h-4 w-4" /> },
     { key: 'members', label: 'Members', icon: <Users2 className="h-4 w-4" />, badge: pendingCount },
-<<<<<<< HEAD
     { key: 'volunteers', label: 'Volunteers', icon: <HandHeart className="h-4 w-4" /> },
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     { key: 'announcements', label: 'Announcements', icon: <Megaphone className="h-4 w-4" /> },
   ];
 
   return (
     <PageContainer>
       <Link
-<<<<<<< HEAD
         to="/app/manage/clubs"
         className="mb-3 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
       >
         <ArrowLeft className="h-4 w-4" /> Back to Clubs
-=======
-        to="/app/manage"
-        className="mb-3 inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 dark:hover:text-slate-200"
-      >
-        <ArrowLeft className="h-4 w-4" /> Coordinator tools
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       </Link>
       <PageHeader
         title={club.name}
@@ -157,23 +123,14 @@ export default function ManageClubPage() {
         }
       />
 
-<<<<<<< HEAD
       {/* Tabs — scrollable on narrow screens so they never force horizontal page scroll */}
       <div className="no-scrollbar mt-6 flex gap-1 overflow-x-auto border-b border-slate-200 dark:border-slate-700">
-=======
-      {/* Tabs */}
-      <div className="mt-6 flex gap-1 border-b border-slate-200 dark:border-slate-700">
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setTab(t.key)}
             className={cn(
-<<<<<<< HEAD
               'relative -mb-px flex shrink-0 items-center gap-2 whitespace-nowrap border-b-2 px-4 py-2.5 text-sm font-medium transition',
-=======
-              'relative -mb-px flex items-center gap-2 border-b-2 px-4 py-2.5 text-sm font-medium transition',
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
               tab === t.key
                 ? 'border-brand-600 text-brand-600'
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200',
@@ -203,10 +160,7 @@ export default function ManageClubPage() {
             }}
           />
         )}
-<<<<<<< HEAD
         {tab === 'volunteers' && <ClubVolunteersTab clubId={clubId} clubName={club.name} />}
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         {tab === 'announcements' && <AnnouncementsTab clubId={clubId} clubName={club.name} />}
       </div>
     </PageContainer>
@@ -219,13 +173,8 @@ const clubSchema = z.object({
   name: z.string().min(1, 'Name is required').max(150),
   category: z.string().optional(),
   description: z.string().max(2000).optional(),
-<<<<<<< HEAD
   logoUrl: optionalImageUrl,
   coverImageUrl: optionalImageUrl,
-=======
-  logoUrl: z.string().url('Enter a valid URL').or(z.literal('')).optional(),
-  coverImageUrl: z.string().url('Enter a valid URL').or(z.literal('')).optional(),
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   contactEmail: z.string().email('Enter a valid email').or(z.literal('')).optional(),
   contactPhone: z.string().max(20).optional(),
 });
@@ -288,7 +237,6 @@ function DetailsTab({
     navigate('/app/manage');
   }
 
-<<<<<<< HEAD
   // Reactivate is the inverse of deactivate; both are coordinator-scoped.
   // onSaved() re-runs the parent's club query so the danger zone flips back.
   async function handleReactivate() {
@@ -301,8 +249,6 @@ function DetailsTab({
     }
   }
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   return (
     <div className="max-w-3xl space-y-6">
     <form onSubmit={handleSubmit(onSubmit)} className="card p-6">
@@ -355,17 +301,12 @@ function DetailsTab({
     </form>
 
       {/* Danger zone — coordinators deactivate a club (hides it from the public
-<<<<<<< HEAD
           catalog) and can reactivate it again. A platform admin can permanently
           delete it from the admin console. */}
-=======
-          catalog). A platform admin can permanently delete it from the admin console. */}
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       <div className="card border-red-200 p-6 dark:border-red-900/50">
         <h3 className="flex items-center gap-2 font-semibold text-red-700 dark:text-red-400">
           <Trash2 className="h-4 w-4" /> Danger zone
         </h3>
-<<<<<<< HEAD
         {club.active ? (
           <>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
@@ -391,18 +332,6 @@ function DetailsTab({
             </div>
           </>
         )}
-=======
-        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-          Deactivating <span className="font-medium">{club.name}</span> hides it from the public
-          catalog and stops new members from joining. An administrator can restore or permanently
-          delete it later.
-        </p>
-        <div className="mt-4">
-          <Button variant="danger" onClick={() => setConfirmDeleteOpen(true)}>
-            <Trash2 className="h-4 w-4" /> Deactivate club
-          </Button>
-        </div>
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       </div>
 
       <ConfirmDialog
@@ -585,7 +514,6 @@ function MembersTab({
   );
 }
 
-<<<<<<< HEAD
 /* ------------------------------ volunteers ----------------------------- */
 
 function ClubVolunteersTab({ clubId, clubName }: { clubId: number; clubName: string }) {
@@ -763,8 +691,6 @@ function ClubVolunteersTab({ clubId, clubName }: { clubId: number; clubName: str
   );
 }
 
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 /* ---------------------------- announcements ---------------------------- */
 
 function AnnouncementsTab({ clubId, clubName }: { clubId: number; clubName: string }) {

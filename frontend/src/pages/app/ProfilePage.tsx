@@ -9,10 +9,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useQuery } from '@/hooks/useApi';
 import { ROLE_LABELS } from '@/lib/constants';
 import { errorMessage } from '@/lib/utils';
-<<<<<<< HEAD
 import { optionalImageUrl } from '@/lib/validation';
-=======
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { PageContainer } from '@/components/layout/RootLayout';
 import {
   Avatar,
@@ -35,11 +32,7 @@ const profileSchema = z.object({
   department: z.string().max(120).optional(),
   phone: z.string().max(20).optional(),
   bio: z.string().max(500).optional(),
-<<<<<<< HEAD
   profilePhotoUrl: optionalImageUrl,
-=======
-  profilePhotoUrl: z.string().url('Enter a valid URL').or(z.literal('')).optional(),
->>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 });
 type ProfileValues = z.infer<typeof profileSchema>;
 
