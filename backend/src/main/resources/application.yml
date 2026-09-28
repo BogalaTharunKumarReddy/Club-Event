@@ -1,0 +1,137 @@
+server:
+  # Render provides PORT automatically; SERVER_PORT remains useful for local runs.
+  port: ${PORT:${SERVER_PORT:8080}}
+  error:
+    # Only echo exception messages / binding errors when explicitly requested (?message=…),
+    # so production responses don't leak internals. Flip to 'always' locally if you want them.
+    include-message: on_param
+    include-binding-errors: on_param
+
+spring:
+  application:
+    name: campusconnect
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/campusconnect?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:tharun1437}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    open-in-view: false
+    show-sql: ${JPA_SHOW_SQL:false}
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    database-platform: ${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.MySQLDialect}
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+  # Mail is optional in development. If credentials are absent, the app still boots
+  # and the NotificationService logs messages instead of sending them.
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# ---- Application specific configuration ----
+app:
+  jwt:
+    # NEVER commit a real secret. The default below is an obvious dev-only placeholder;
+    # ALWAYS override JWT_SECRET in any shared/production environment (min 32 bytes / 256 bits).
+    # Generate one with:  openssl rand -base64 48
+    secret: ${JWT_SECRET:dev-only-insecure-signing-key-change-me-in-production-0123456789}
+    access-token-expiration-ms: ${JWT_ACCESS_EXPIRATION:3600000}      # 1 hour
+    refresh-token-expiration-ms: ${JWT_REFRESH_EXPIRATION:604800000}  # 7 days
+    issuer: campusconnect
+
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
+
+  mail:
+    enabled: ${MAIL_ENABLED:false}
+    from: ${MAIL_FROM:no-reply@campusconnect.local}
+
+  frontend:
+    base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
+
+  seed:
+    # Populates realistic demo data on first startup when the DB is empty.
+    # Secure default is OFF — opt in with SEED_ENABLED=true (e.g. for the local demo).
+    enabled: ${SEED_ENABLED:false}
+
+  # Payment gateway abstraction. Provider credentials must come from env, never hardcoded.
+  payment:
+    provider: ${PAYMENT_PROVIDER:mock}
+    currency: ${PAYMENT_CURRENCY:INR}
+    # Razorpay (test mode uses rzp_test_* keys). Credentials come from the environment only and
+    # are never committed; the secret key never leaves the server. Selected when provider=razorpay.
+    razorpay:
+      key-id: ${RAZORPAY_KEY_ID:}
+      key-secret: ${RAZORPAY_KEY_SECRET:}
+      base-url: ${RAZORPAY_BASE_URL:https://api.razorpay.com/v1}
+
+  # WhatsApp messaging abstraction (mirrors the payment abstraction). The default 'log' provider is a
+  # no-op that logs messages instead of sending, so the app runs with no setup. Set provider=twilio and
+  # supply the Twilio credentials below to deliver real WhatsApp messages. Credentials come from env
+  # only and never reach the client; the auth token never leaves the server.
+  whatsapp:
+    provider: ${WHATSAPP_PROVIDER:log}          # log | twilio
+    # Fallback country code (digits only, e.g. 91) applied to profile numbers stored without a leading
+    # '+'. Leave blank to require fully-international numbers (numbers without it are skipped, not guessed).
+    default-country-code: ${WHATSAPP_DEFAULT_COUNTRY_CODE:}
+    twilio:
+      account-sid: ${TWILIO_ACCOUNT_SID:}
+      auth-token: ${TWILIO_AUTH_TOKEN:}
+      from: ${TWILIO_WHATSAPP_FROM:}             # e.g. whatsapp:+14155238886 (Twilio sandbox/sender)
+      base-url: ${TWILIO_BASE_URL:https://api.twilio.com}
+
+  # File storage abstraction. 'local' writes under a directory and serves via /api/files;
+  # 's3' targets AWS S3 or any S3-compatible store. Credentials come from env, never hardcoded.
+  storage:
+    provider: ${STORAGE_PROVIDER:local}          # local | s3
+    local:
+      directory: ${STORAGE_LOCAL_DIR:./uploads}
+      public-base-url: ${STORAGE_PUBLIC_BASE_URL:/api/files}
+    s3:
+      bucket: ${STORAGE_S3_BUCKET:}
+      region: ${STORAGE_S3_REGION:us-east-1}
+      endpoint: ${STORAGE_S3_ENDPOINT:}          # optional; set for MinIO/R2/Spaces
+      access-key: ${STORAGE_S3_ACCESS_KEY:}
+      secret-key: ${STORAGE_S3_SECRET_KEY:}
+      path-style: ${STORAGE_S3_PATH_STYLE:false}
+      public-base-url: ${STORAGE_S3_PUBLIC_BASE_URL:}  # optional CDN/base URL for object links
+
+  # AI integration is interface-only until a key is supplied via env.
+  ai:
+    enabled: ${AI_ENABLED:false}
+    provider: ${AI_PROVIDER:openai}
+    base-url: ${AI_BASE_URL:https://api.openai.com/v1}
+    api-key: ${AI_API_KEY:}
+    model: ${AI_MODEL:gpt-4o-mini}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    org.springframework.security: ${LOG_SECURITY_LEVEL:INFO}
+    com.campusconnect: ${LOG_APP_LEVEL:INFO}

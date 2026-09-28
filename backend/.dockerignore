@@ -1,0 +1,13 @@
+# Keep build context small and never ship local secrets or build output.
+target/
+.env
+*.env
+!*.env.example
+.idea/
+*.iml
+.vscode/
+*.log
+.git/
+.gitignore
+Dockerfile
+.dockerignore
