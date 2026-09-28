@@ -7,7 +7,10 @@ import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/context/AuthContext';
 import { errorMessage } from '@/lib/utils';
+<<<<<<< HEAD
 import { roleHome } from '@/lib/roleHome';
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { Button, Field, TextInput } from '@/components/ui';
 import { AuthShell } from './AuthShell';
 
@@ -55,7 +58,11 @@ export default function RegisterPage() {
         phone: values.phone || undefined,
       });
       toast.success(`Welcome to CampusConnect, ${user.fullName.split(' ')[0]}!`);
+<<<<<<< HEAD
       navigate(roleHome(user.role), { replace: true });
+=======
+      navigate('/app/dashboard', { replace: true });
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     } catch (err) {
       setServerError(errorMessage(err, 'Could not create your account.'));
     }

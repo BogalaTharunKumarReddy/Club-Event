@@ -11,7 +11,10 @@ import {
   CalendarCheck,
   CalendarClock,
   CalendarDays,
+<<<<<<< HEAD
   ClipboardCheck,
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   CreditCard,
   Flame,
   GraduationCap,
@@ -22,8 +25,11 @@ import {
   LayoutDashboard,
   Megaphone,
   MessageSquare,
+<<<<<<< HEAD
   PanelLeft,
   PanelLeftClose,
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   QrCode,
   ShieldCheck,
   Star,
@@ -36,7 +42,10 @@ import {
 import { useAuth } from '@/context/AuthContext';
 import { ROLE_LABELS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+<<<<<<< HEAD
 import { roleHome } from '@/lib/roleHome';
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { Avatar } from '@/components/ui/Avatar';
 import type { Role } from '@/types';
 
@@ -46,8 +55,11 @@ interface NavItem {
   icon: ReactNode;
   /** Match the path exactly (used for parent routes with children). */
   end?: boolean;
+<<<<<<< HEAD
   /** When set, the item only renders for users holding one of these roles. */
   roles?: Role[];
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }
 
 interface NavSection {
@@ -60,6 +72,7 @@ interface NavSection {
 
 /**
  * Role-aware application sidebar. Rendered inside {@link AppLayout} for every
+<<<<<<< HEAD
  * authenticated `/app/*` route. On large screens it is a fixed rail that can be
  * collapsed to an icon-only strip; on small screens it slides in as a full-width
  * drawer controlled by {@code open}/{@code onClose} (collapse never applies to
@@ -78,6 +91,12 @@ export function Sidebar({
   /** Toggles {@link collapsed}; when omitted the collapse control is hidden. */
   onToggleCollapse?: () => void;
 }) {
+=======
+ * authenticated `/app/*` route. On large screens it is a fixed rail; on small
+ * screens it slides in as a drawer controlled by {@code open}/{@code onClose}.
+ */
+export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   const { user, hasRole } = useAuth();
   const { t } = useTranslation();
 
@@ -90,8 +109,11 @@ export function Sidebar({
           label: t('nav.dashboard'),
           icon: <LayoutDashboard className="h-[18px] w-[18px] shrink-0" />,
           end: true,
+<<<<<<< HEAD
           // Volunteers have their own dashboard under the Volunteer section.
           roles: ['STUDENT', 'CLUB_MEMBER', 'CLUB_COORDINATOR', 'ADMIN'],
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         },
       ],
     },
@@ -130,34 +152,49 @@ export function Sidebar({
           to: '/app/my-events',
           label: t('nav.myEvents'),
           icon: <Ticket className="h-[18px] w-[18px] shrink-0" />,
+<<<<<<< HEAD
           // Attendee views — admins manage from the Administration section instead.
           roles: ['STUDENT', 'CLUB_MEMBER', 'CLUB_COORDINATOR'],
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         },
         {
           to: '/app/saved',
           label: 'Saved events',
           icon: <Bookmark className="h-[18px] w-[18px] shrink-0" />,
+<<<<<<< HEAD
           roles: ['STUDENT', 'CLUB_MEMBER', 'CLUB_COORDINATOR'],
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         },
         {
           to: '/app/following',
           label: 'Following',
           icon: <Heart className="h-[18px] w-[18px] shrink-0" />,
+<<<<<<< HEAD
           roles: ['STUDENT', 'CLUB_MEMBER', 'CLUB_COORDINATOR'],
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         },
         {
           to: '/app/volunteering',
           label: 'Volunteering',
           icon: <HandHeart className="h-[18px] w-[18px] shrink-0" />,
+<<<<<<< HEAD
           // Students don't volunteer; volunteers use their dedicated workspace.
           roles: ['CLUB_MEMBER', 'CLUB_COORDINATOR'],
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         },
         {
           to: '/app/certificates',
           label: t('nav.certificates'),
           icon: <Award className="h-[18px] w-[18px] shrink-0" />,
+<<<<<<< HEAD
           // Admins have the platform-wide certificate view under Administration.
           roles: ['STUDENT', 'CLUB_MEMBER', 'CLUB_COORDINATOR', 'VOLUNTEER'],
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         },
         {
           to: '/app/notifications',
@@ -172,6 +209,7 @@ export function Sidebar({
       ],
     },
     {
+<<<<<<< HEAD
       key: 'checkin',
       heading: 'Check-in',
       // The attendee check-in scanner is shared by club members and
@@ -220,6 +258,8 @@ export function Sidebar({
       ],
     },
     {
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       key: 'coordinator',
       heading: 'Coordinator',
       roles: ['CLUB_COORDINATOR'],
@@ -343,6 +383,7 @@ export function Sidebar({
     },
   ];
 
+<<<<<<< HEAD
   // Gate at both levels: a section may be role-scoped, and individual items may
   // be too. Items are filtered first, then any section left with no items is
   // dropped so we never render an empty heading.
@@ -350,6 +391,9 @@ export function Sidebar({
     .filter((s) => !s.roles || hasRole(...s.roles))
     .map((s) => ({ ...s, items: s.items.filter((i) => !i.roles || hasRole(...i.roles)) }))
     .filter((s) => s.items.length > 0);
+=======
+  const visibleSections = sections.filter((s) => !s.roles || hasRole(...s.roles));
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
@@ -373,14 +417,20 @@ export function Sidebar({
 
       <aside
         className={cn(
+<<<<<<< HEAD
           'fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-slate-200 bg-white transition-[transform,width] duration-200 ease-in-out dark:border-slate-800 dark:bg-slate-900 lg:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full',
           // Collapse is a desktop-only affordance: the mobile drawer stays full width.
           collapsed ? 'lg:w-16' : 'lg:w-64',
+=======
+          'fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-slate-200 bg-white transition-transform duration-200 ease-in-out dark:border-slate-800 dark:bg-slate-900 lg:translate-x-0',
+          open ? 'translate-x-0' : '-translate-x-full',
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         )}
         aria-label="Sidebar"
       >
         {/* Brand */}
+<<<<<<< HEAD
         <div
           className={cn(
             'flex h-16 shrink-0 items-center gap-2 border-b border-slate-200 px-4 dark:border-slate-800',
@@ -392,6 +442,10 @@ export function Sidebar({
             onClick={onClose}
             className={cn('flex items-center gap-2', collapsed && 'lg:hidden')}
           >
+=======
+        <div className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-slate-200 px-4 dark:border-slate-800">
+          <Link to="/app/dashboard" onClick={onClose} className="flex items-center gap-2">
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white">
               <GraduationCap className="h-5 w-5" />
             </span>
@@ -399,8 +453,11 @@ export function Sidebar({
               {t('appName')}
             </span>
           </Link>
+<<<<<<< HEAD
 
           {/* Mobile drawer close */}
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           <button
             onClick={onClose}
             className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden"
@@ -408,6 +465,7 @@ export function Sidebar({
           >
             <X className="h-5 w-5" />
           </button>
+<<<<<<< HEAD
 
           {/* Desktop collapse / expand toggle */}
           {onToggleCollapse && (
@@ -441,6 +499,16 @@ export function Sidebar({
                     collapsed && 'lg:hidden',
                   )}
                 >
+=======
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 overflow-y-auto px-3 py-4">
+          {visibleSections.map((section) => (
+            <div key={section.key} className="mb-1">
+              {section.heading && (
+                <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                   {section.heading}
                 </p>
               )}
@@ -451,6 +519,7 @@ export function Sidebar({
                     to={item.to}
                     end={item.end}
                     onClick={onClose}
+<<<<<<< HEAD
                     className={({ isActive }) =>
                       cn(linkClass({ isActive }), collapsed && 'lg:justify-center lg:px-2')
                     }
@@ -458,6 +527,12 @@ export function Sidebar({
                   >
                     {item.icon}
                     <span className={cn(collapsed && 'lg:hidden')}>{item.label}</span>
+=======
+                    className={linkClass}
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                   </NavLink>
                 ))}
               </div>
@@ -471,6 +546,7 @@ export function Sidebar({
             <Link
               to="/app/profile"
               onClick={onClose}
+<<<<<<< HEAD
               className={cn(
                 'flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800',
                 collapsed && 'lg:justify-center lg:px-0',
@@ -479,6 +555,12 @@ export function Sidebar({
             >
               <Avatar name={user.fullName} src={user.profilePhotoUrl} size="sm" />
               <div className={cn('min-w-0', collapsed && 'lg:hidden')}>
+=======
+              className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800"
+            >
+              <Avatar name={user.fullName} src={user.profilePhotoUrl} size="sm" />
+              <div className="min-w-0">
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                 <p className="truncate text-sm font-medium text-slate-800 dark:text-slate-100">
                   {user.fullName}
                 </p>

@@ -44,11 +44,19 @@ export function ClubCard({ club, onFollowChange }: ClubCardProps) {
 
       <div className="flex flex-1 flex-col p-4 pt-8">
         <div className="flex items-center gap-2">
+<<<<<<< HEAD
           <h3 className="min-w-0 truncate font-semibold text-slate-900 group-hover:text-brand-700 dark:text-slate-100 dark:group-hover:text-brand-400">
             {club.name}
           </h3>
           {!club.active && (
             <span className="badge shrink-0 bg-slate-100 text-slate-500 dark:bg-slate-800">Inactive</span>
+=======
+          <h3 className="font-semibold text-slate-900 group-hover:text-brand-700 dark:text-slate-100 dark:group-hover:text-brand-400">
+            {club.name}
+          </h3>
+          {!club.active && (
+            <span className="badge bg-slate-100 text-slate-500 dark:bg-slate-800">Inactive</span>
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           )}
         </div>
         {club.category && (
@@ -60,7 +68,11 @@ export function ClubCard({ club, onFollowChange }: ClubCardProps) {
           </p>
         )}
 
+<<<<<<< HEAD
         <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-100 pt-3 text-xs text-slate-400 dark:border-slate-800">
+=======
+        <div className="mt-4 flex items-center gap-4 border-t border-slate-100 pt-3 text-xs text-slate-400 dark:border-slate-800">
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           <span className="flex items-center gap-1">
             <Users2 className="h-3.5 w-3.5" />
             {club.memberCount} members

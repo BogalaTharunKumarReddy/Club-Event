@@ -1,7 +1,10 @@
 package com.campusconnect.service.impl;
 
 import com.campusconnect.dto.request.AnnouncementRequest;
+<<<<<<< HEAD
 import com.campusconnect.dto.request.AnnouncementUpdateRequest;
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import com.campusconnect.dto.response.AnnouncementResponse;
 import com.campusconnect.entity.Announcement;
 import com.campusconnect.entity.Club;
@@ -97,6 +100,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     @Transactional
+<<<<<<< HEAD
     public AnnouncementResponse update(Long actingUserId, Long announcementId, AnnouncementUpdateRequest request) {
         Announcement announcement = announcementRepository.findById(announcementId)
                 .orElseThrow(() -> new ResourceNotFoundException("Announcement", "id", announcementId));
@@ -114,6 +118,8 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     @Transactional
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     public void delete(Long actingUserId, Long announcementId) {
         Announcement announcement = announcementRepository.findById(announcementId)
                 .orElseThrow(() -> new ResourceNotFoundException("Announcement", "id", announcementId));
@@ -167,6 +173,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     // ---- helpers ----
 
     private boolean canManage(Announcement announcement, Long userId) {
+<<<<<<< HEAD
         // Platform admins may moderate (edit/delete) any announcement, matching the
         // admin-inclusive moderation model used for discussion comments and media.
         if (announcement.getScope() == AnnouncementScope.CLUB && announcement.getClub() != null) {
@@ -177,6 +184,16 @@ public class AnnouncementServiceImpl implements AnnouncementService {
             return clubAccess.isAdminOrCoordinator(announcement.getEvent().getClub().getId(), userId);
         }
         return clubAccess.isPlatformAdmin(userId);
+=======
+        if (announcement.getScope() == AnnouncementScope.CLUB && announcement.getClub() != null) {
+            return clubAccess.isCoordinator(announcement.getClub().getId(), userId);
+        }
+        if (announcement.getScope() == AnnouncementScope.EVENT && announcement.getEvent() != null
+                && announcement.getEvent().getClub() != null) {
+            return clubAccess.isCoordinator(announcement.getEvent().getClub().getId(), userId);
+        }
+        return false;
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     }
 
     private void fanOutToClubMembers(Club club, Announcement announcement, Long actingUserId) {

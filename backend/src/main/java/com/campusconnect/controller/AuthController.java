@@ -2,7 +2,10 @@ package com.campusconnect.controller;
 
 import com.campusconnect.common.ApiResponse;
 import com.campusconnect.dto.request.ForgotPasswordRequest;
+<<<<<<< HEAD
 import com.campusconnect.dto.request.LoginOtpRequest;
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import com.campusconnect.dto.request.LoginRequest;
 import com.campusconnect.dto.request.RefreshTokenRequest;
 import com.campusconnect.dto.request.RegisterRequest;
@@ -61,6 +64,7 @@ public class AuthController {
                 authService.verifyOtp(request, clientIp(servletRequest)));
     }
 
+<<<<<<< HEAD
     @Operation(summary = "Passwordless login: send a one-time code by email and WhatsApp")
     @PostMapping("/login/otp")
     public ApiResponse<AuthResponse> requestLoginOtp(@Valid @RequestBody LoginOtpRequest request,
@@ -73,6 +77,8 @@ public class AuthController {
                 response);
     }
 
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     @Operation(summary = "Exchange a valid refresh token for a new access token")
     @PostMapping("/refresh")
     public ApiResponse<AuthResponse> refresh(@Valid @RequestBody RefreshTokenRequest request) {

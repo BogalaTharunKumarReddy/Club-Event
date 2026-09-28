@@ -1,7 +1,11 @@
 package com.campusconnect.entity;
 
+<<<<<<< HEAD
 import com.campusconnect.entity.enums.VolunteerTaskPriority;
 import com.campusconnect.entity.enums.VolunteerTaskStatus;
+=======
+import com.campusconnect.entity.enums.TaskStatus;
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,7 +13,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
+<<<<<<< HEAD
 import jakarta.persistence.Lob;
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,6 +25,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+<<<<<<< HEAD
 import java.time.Instant;
 
 /**
@@ -33,6 +41,14 @@ import java.time.Instant;
                 @Index(name = "idx_vtask_event", columnList = "event_id"),
                 @Index(name = "idx_vtask_status", columnList = "status")
         }
+=======
+import java.time.LocalDateTime;
+
+@Entity
+@Table(
+        name = "volunteer_tasks",
+        indexes = @Index(name = "idx_vtask_volunteer", columnList = "volunteer_id")
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 )
 @Getter
 @Setter
@@ -45,6 +61,7 @@ public class VolunteerTask extends BaseEntity {
     @JoinColumn(name = "volunteer_id", nullable = false)
     private Volunteer volunteer;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
@@ -91,4 +108,18 @@ public class VolunteerTask extends BaseEntity {
     @Lob
     @Column(name = "completion_notes", columnDefinition = "TEXT")
     private String completionNotes;
+=======
+    @Column(nullable = false, length = 180)
+    private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 16)
+    @Builder.Default
+    private TaskStatus status = TaskStatus.PENDING;
+
+    private LocalDateTime dueAt;
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }

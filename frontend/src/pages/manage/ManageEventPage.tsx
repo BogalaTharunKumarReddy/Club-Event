@@ -5,7 +5,10 @@ import {
   Award,
   BarChart3,
   CalendarClock,
+<<<<<<< HEAD
   ExternalLink,
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   HandHeart,
   ImageIcon,
   Megaphone,
@@ -128,9 +131,12 @@ export default function ManageEventPage() {
         }
         actions={
           <div className="flex items-center gap-2">
+<<<<<<< HEAD
             <Link to={`/events/${event.id}`} className="btn-ghost text-sm">
               <ExternalLink className="h-4 w-4" /> View
             </Link>
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             <Link to={`/app/manage/events/${event.id}/edit`} className="btn-secondary text-sm">
               <Pencil className="h-4 w-4" /> Edit
             </Link>

@@ -27,9 +27,15 @@ import {
   EmptyState,
   ErrorState,
   Field,
+<<<<<<< HEAD
   Modal,
   PageHeader,
   SectionLoader,
+=======
+  FullPageLoader,
+  Modal,
+  PageHeader,
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   Select,
   TextArea,
   TextInput,
@@ -71,7 +77,11 @@ export default function ManageCompetitionPage() {
 
   const [busy, setBusy] = useState(false);
 
+<<<<<<< HEAD
   if (loading) return <SectionLoader />;
+=======
+  if (loading) return <FullPageLoader />;
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (error || !competition) {
     return (
       <PageContainer>
@@ -204,7 +214,11 @@ function RoundsTab({ competitionId }: { competitionId: number }) {
       </div>
 
       {loading ? (
+<<<<<<< HEAD
         <SectionLoader />
+=======
+        <FullPageLoader />
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       ) : error ? (
         <ErrorState message={error} onRetry={reload} />
       ) : rounds.length === 0 ? (
@@ -590,7 +604,11 @@ function ScoringTab({
     reloadScores();
   }
 
+<<<<<<< HEAD
   if (roundsLoading) return <SectionLoader />;
+=======
+  if (roundsLoading) return <FullPageLoader />;
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   if (sortedRounds.length === 0) {
     return (
@@ -659,7 +677,11 @@ function ScoringTab({
       {isOngoing && myJudge && activeRound && (
         <div>
           {participantsLoading ? (
+<<<<<<< HEAD
             <SectionLoader />
+=======
+            <FullPageLoader />
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           ) : !participants || participants.length === 0 ? (
             <EmptyState
               icon={<Trophy className="h-6 w-6" />}

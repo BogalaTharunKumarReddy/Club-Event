@@ -147,7 +147,15 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Transactional
     public void markRead(Long userId, Long notificationId) {
+<<<<<<< HEAD
         Notification notification = requireOwned(userId, notificationId);
+=======
+        Notification notification = notificationRepository.findById(notificationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Notification", "id", notificationId));
+        if (notification.getRecipient() == null || !notification.getRecipient().getId().equals(userId)) {
+            throw new ForbiddenException("You can only update your own notifications.");
+        }
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         if (!notification.isRead()) {
             notification.setRead(true);
             notificationRepository.save(notification);
@@ -162,6 +170,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     @Transactional
+<<<<<<< HEAD
     public void markUnread(Long userId, Long notificationId) {
         Notification notification = requireOwned(userId, notificationId);
         if (notification.isRead()) {
@@ -199,6 +208,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     @Transactional
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     public NotificationPreferenceResponse getPreferences(Long userId) {
         return NotificationPreferenceMapper.toResponse(resolvePreference(userId));
     }

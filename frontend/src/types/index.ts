@@ -10,7 +10,11 @@
 /* Enums (mirror com.campusconnect.entity.enums)                       */
 /* ------------------------------------------------------------------ */
 
+<<<<<<< HEAD
 export type Role = 'STUDENT' | 'VOLUNTEER' | 'CLUB_MEMBER' | 'CLUB_COORDINATOR' | 'ADMIN';
+=======
+export type Role = 'STUDENT' | 'CLUB_MEMBER' | 'CLUB_COORDINATOR' | 'ADMIN';
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
 export type EventMode = 'ONLINE' | 'OFFLINE' | 'HYBRID';
 
@@ -122,6 +126,7 @@ export interface ResetPasswordRequest {
   newPassword: string;
 }
 
+<<<<<<< HEAD
 /** Start a passwordless sign-in: the server emails/WhatsApps a one-time code. */
 export interface LoginOtpRequest {
   /** Email address or phone number of the account to sign in to. */
@@ -140,14 +145,19 @@ export interface VerifyOtpRequest {
  * that the client echoes back to `/auth/verify-otp` with the 6-digit code (tokens
  * and `user` are absent until the challenge is completed).
  */
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
   tokenType: string;
   expiresIn: number;
   user: UserResponse;
+<<<<<<< HEAD
   twoFactorRequired?: boolean;
   challengeToken?: string;
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }
 
 /* ------------------------------------------------------------------ */
@@ -400,11 +410,14 @@ export interface RegistrationRequest {
   teamId?: number;
 }
 
+<<<<<<< HEAD
 /** Confirm ticket ownership with the 6-digit one-time code sent by email + WhatsApp. */
 export interface VerifyTicketRequest {
   code: string;
 }
 
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 export interface RegistrationResponse {
   id: number;
   eventId: number;
@@ -416,6 +429,7 @@ export interface RegistrationResponse {
   type: RegistrationType;
   status: RegistrationStatus;
   ticketCode: string;
+<<<<<<< HEAD
   /** True when the event charges a fee (so a ticket requires a completed payment). */
   paidEvent: boolean;
   /** True when the ticket can be issued: an active seat, and for paid events, payment cleared. */
@@ -424,6 +438,8 @@ export interface RegistrationResponse {
   ticketVerified: boolean;
   /** Current status of the event this registration belongs to (drives post-event actions like feedback). */
   eventStatus: EventStatus;
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   createdAt: string;
 }
 
@@ -491,6 +507,7 @@ export interface PaymentInitiateRequest {
   eventId: number;
 }
 
+<<<<<<< HEAD
 /** Confirms a hosted checkout (e.g. Razorpay) back to the server for signature verification. */
 export interface PaymentVerifyRequest {
   paymentId: number;
@@ -506,6 +523,8 @@ export interface PaymentConfigResponse {
   currency: string;
 }
 
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 export interface PaymentResponse {
   id: number;
   eventId: number;
@@ -914,6 +933,7 @@ export interface ClubDashboardResponse {
 /* Volunteers                                                          */
 /* ------------------------------------------------------------------ */
 
+<<<<<<< HEAD
 /* ------------------------------------------------------------------ */
 /* Volunteers (club-scoped volunteer role, event assignments & tasks)  */
 /* ------------------------------------------------------------------ */
@@ -1128,6 +1148,54 @@ export interface VolunteerTaskCompleteRequest {
 export interface VolunteerScanRequest {
   eventId: number;
   ticketCode: string;
+=======
+export interface VolunteerResponse {
+  id: number;
+  eventId: number;
+  eventTitle: string;
+  userId: number;
+  userName: string;
+  userEmail: string;
+  approved: boolean;
+  role?: string;
+  taskCount: number;
+  completedTaskCount: number;
+  createdAt: string;
+}
+
+export interface VolunteerTaskResponse {
+  id: number;
+  volunteerId: number;
+  eventId: number;
+  eventTitle: string;
+  assigneeId: number;
+  assigneeName: string;
+  title: string;
+  description?: string;
+  status: TaskStatus;
+  dueAt?: string;
+  createdAt: string;
+}
+
+export interface VolunteerApplyRequest {
+  eventId: number;
+  preferredRole?: string;
+}
+
+export interface RecruitVolunteerRequest {
+  email: string;
+  role?: string;
+}
+
+export interface VolunteerTaskRequest {
+  title: string;
+  description?: string;
+  dueAt?: string;
+}
+
+export interface UpdateTaskStatusRequest {
+  status: TaskStatus;
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 }
 
 /* ------------------------------------------------------------------ */
@@ -1192,6 +1260,7 @@ export interface CommentRequest {
 export interface CommentUpdateRequest {
   content: string;
 }
+<<<<<<< HEAD
 
 /* ------------------------------------------------------------------ */
 /* In-app help assistant                                               */
@@ -1218,3 +1287,5 @@ export interface AssistantChatRequest {
 export interface AssistantChatResponse {
   reply: string;
 }
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6

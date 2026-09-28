@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+<<<<<<< HEAD
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   CalendarDays,
@@ -13,6 +14,12 @@ import {
 import toast from 'react-hot-toast';
 import {
   adminService,
+=======
+import { Link, useParams } from 'react-router-dom';
+import { Mail, Phone, Settings, UserPlus, Users2 } from 'lucide-react';
+import toast from 'react-hot-toast';
+import {
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   announcementService,
   clubService,
   eventService,
@@ -26,12 +33,18 @@ import { EventCard } from '@/components/domain/EventCard';
 import { FollowClubButton } from '@/components/domain/FollowClubButton';
 import { AnnouncementList } from '@/components/domain/AnnouncementList';
 import { MediaGallery } from '@/components/domain/MediaGallery';
+<<<<<<< HEAD
 import { AddVolunteerModal } from '@/components/domain/AddVolunteerModal';
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import {
   Avatar,
   Badge,
   Button,
+<<<<<<< HEAD
   ConfirmDialog,
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   EmptyState,
   ErrorState,
   FullPageLoader,
@@ -43,12 +56,18 @@ type Tab = 'events' | 'announcements' | 'gallery' | 'members';
 export default function ClubDetailPage() {
   const { id } = useParams();
   const clubId = Number(id);
+<<<<<<< HEAD
   const navigate = useNavigate();
   const { isAuthenticated, hasRole } = useAuth();
   const [tab, setTab] = useState<Tab>('events');
   const [working, setWorking] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [addVolunteerOpen, setAddVolunteerOpen] = useState(false);
+=======
+  const { isAuthenticated, hasRole } = useAuth();
+  const [tab, setTab] = useState<Tab>('events');
+  const [working, setWorking] = useState(false);
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const {
     data: club,
@@ -80,7 +99,10 @@ export default function ClubDetailPage() {
     [myMemberships, clubId],
   );
 
+<<<<<<< HEAD
   const isAdmin = hasRole('ADMIN');
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   const canManage =
     hasRole('CLUB_COORDINATOR') &&
     (myMembership?.clubRole === 'COORDINATOR' || club?.createdById === myMembership?.userId);
@@ -90,12 +112,15 @@ export default function ClubDetailPage() {
   const canContributeMedia = hasRole('ADMIN') || myMembership?.status === 'ACTIVE';
   const canManageMedia = hasRole('ADMIN') || canManage;
 
+<<<<<<< HEAD
   // Adding a volunteer is open to any active member of the club (coordinators
   // included) and to platform admins — this mirrors the backend's
   // requireAdminOrActiveMember check. Coordinators also manage the full roster
   // from the Manage console; this surfaces the same "add" action to members.
   const canAddVolunteer = hasRole('ADMIN') || myMembership?.status === 'ACTIVE';
 
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   if (loading) return <FullPageLoader />;
   if (error || !club) {
     return (
@@ -105,12 +130,15 @@ export default function ClubDetailPage() {
     );
   }
 
+<<<<<<< HEAD
   // Admins can permanently delete any club; a managing coordinator can retire
   // (deactivate) a club that is still active. The backend enforces both.
   const canHardDelete = isAdmin;
   const canDeactivate = !isAdmin && canManage && club.active;
   const canDelete = canHardDelete || canDeactivate;
 
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   async function handleJoin() {
     setWorking(true);
     try {
@@ -141,6 +169,7 @@ export default function ClubDetailPage() {
     }
   }
 
+<<<<<<< HEAD
   // Errors are surfaced by the ConfirmDialog (it awaits this promise), so let
   // them propagate rather than swallowing them here.
   async function handleDelete() {
@@ -157,6 +186,9 @@ export default function ClubDetailPage() {
 
   const activeMembers = (members ?? []).filter((m) => m.status === 'ACTIVE');
   const hasContact = Boolean(club.contactEmail || club.contactPhone);
+=======
+  const activeMembers = (members ?? []).filter((m) => m.status === 'ACTIVE');
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const TABS: { key: Tab; label: string }[] = [
     { key: 'events', label: `Events (${events?.totalElements ?? 0})` },
@@ -167,6 +199,7 @@ export default function ClubDetailPage() {
 
   return (
     <div>
+<<<<<<< HEAD
       {/* === Club header (redesigned 2026-09-24) ===================================
           The cover image and the logo live on SEPARATE layers. The logo sits in its
           own solid, framed tile, so a transparent PNG logo can never blend into /
@@ -208,10 +241,31 @@ export default function ClubDetailPage() {
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="break-words text-2xl font-bold text-slate-900 dark:text-slate-50">
+=======
+      {/* Cover */}
+      <div className="relative h-40 w-full overflow-hidden bg-gradient-to-r from-brand-500 to-indigo-700 sm:h-52">
+        {club.coverImageUrl && (
+          <img src={club.coverImageUrl} alt="" className="h-full w-full object-cover" />
+        )}
+      </div>
+
+      <PageContainer>
+        <div className="-mt-16 flex flex-col gap-4 sm:flex-row sm:items-end">
+          <Avatar
+            name={club.name}
+            src={club.logoUrl}
+            size="lg"
+            className="h-24 w-24 text-2xl ring-4 ring-white dark:ring-slate-950"
+          />
+          <div className="flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50">
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                 {club.name}
               </h1>
               {club.category && <Badge>{club.category}</Badge>}
               {!club.active && (
+<<<<<<< HEAD
                 <Badge className="bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
                   Inactive
                 </Badge>
@@ -234,6 +288,18 @@ export default function ClubDetailPage() {
           </div>
 
           <div className="flex flex-wrap gap-2 sm:shrink-0">
+=======
+                <Badge className="bg-slate-200 text-slate-600">Inactive</Badge>
+              )}
+            </div>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              {club.memberCount} members · {club.eventCount} events
+              {club.followerCount > 0 && ` · ${club.followerCount} follower${club.followerCount === 1 ? '' : 's'}`}
+            </p>
+          </div>
+
+          <div className="flex gap-2">
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             <FollowClubButton
               clubId={clubId}
               initialFollowing={club.following}
@@ -262,6 +328,7 @@ export default function ClubDetailPage() {
                 </Button>
               )
             )}
+<<<<<<< HEAD
             {canDelete && (
               <Button variant="danger" onClick={() => setConfirmDelete(true)}>
                 <Trash2 className="h-4 w-4" /> {isAdmin ? 'Delete' : 'Deactivate'}
@@ -299,18 +366,52 @@ export default function ClubDetailPage() {
                   </span>
                 )}
               </div>
+=======
+          </div>
+        </div>
+
+        {club.description && (
+          <p className="mt-5 max-w-3xl whitespace-pre-line text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            {club.description}
+          </p>
+        )}
+
+        {(club.contactEmail || club.contactPhone) && (
+          <div className="mt-3 flex flex-wrap gap-4 text-sm text-slate-500 dark:text-slate-400">
+            {club.contactEmail && (
+              <a
+                href={`mailto:${club.contactEmail}`}
+                className="flex items-center gap-1.5 hover:text-brand-600"
+              >
+                <Mail className="h-4 w-4" /> {club.contactEmail}
+              </a>
+            )}
+            {club.contactPhone && (
+              <span className="flex items-center gap-1.5">
+                <Phone className="h-4 w-4" /> {club.contactPhone}
+              </span>
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             )}
           </div>
         )}
 
+<<<<<<< HEAD
         {/* Tabs — scrollable on narrow screens so they never force page-wide horizontal scroll */}
         <div className="no-scrollbar mb-6 mt-8 flex gap-1 overflow-x-auto border-b border-slate-200 dark:border-slate-800">
+=======
+        {/* Tabs */}
+        <div className="mb-6 mt-8 flex gap-1 border-b border-slate-200 dark:border-slate-800">
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           {TABS.map((t) => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
               className={cn(
+<<<<<<< HEAD
                 '-mb-px shrink-0 whitespace-nowrap border-b-2 px-4 py-2.5 text-sm font-medium transition',
+=======
+                '-mb-px border-b-2 px-4 py-2.5 text-sm font-medium transition',
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                 tab === t.key
                   ? 'border-brand-600 text-brand-700 dark:text-brand-400'
                   : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200',
@@ -342,6 +443,7 @@ export default function ClubDetailPage() {
           />
         )}
 
+<<<<<<< HEAD
         {tab === 'members' && (
           <div className="space-y-4">
             {canAddVolunteer && (
@@ -399,6 +501,32 @@ export default function ClubDetailPage() {
         clubName={club.name}
         onAdded={() => setAddVolunteerOpen(false)}
       />
+=======
+        {tab === 'members' &&
+          (activeMembers.length > 0 ? (
+            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {activeMembers.map((m) => (
+                <li key={m.id} className="card flex items-center gap-3 p-4">
+                  <Avatar name={m.fullName} size="md" />
+                  <div className="min-w-0">
+                    <p className="truncate font-medium text-slate-900 dark:text-slate-100">
+                      {m.fullName}
+                    </p>
+                    <p className="text-xs text-slate-400">
+                      {m.clubRole === 'COORDINATOR' ? 'Coordinator' : 'Member'}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <EmptyState
+              icon={<Users2 className="h-6 w-6" />}
+              title="No members listed"
+            />
+          ))}
+      </PageContainer>
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
     </div>
   );
 }

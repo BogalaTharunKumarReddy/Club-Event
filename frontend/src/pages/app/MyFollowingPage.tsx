@@ -1,4 +1,8 @@
 import { Heart } from 'lucide-react';
+<<<<<<< HEAD
+=======
+import { Link } from 'react-router-dom';
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { clubService } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
 import { PageContainer } from '@/components/layout/RootLayout';
@@ -37,6 +41,14 @@ export default function MyFollowingPage() {
             icon={<Heart className="h-6 w-6" />}
             title="You're not following any clubs yet"
             description="Follow a club to get notified when it posts new events."
+<<<<<<< HEAD
+=======
+            action={
+              <Link to="/clubs" className="btn-primary">
+                Browse clubs
+              </Link>
+            }
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           />
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

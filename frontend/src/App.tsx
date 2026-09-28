@@ -6,7 +6,10 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { ProtectedRoute } from '@/components/routing/ProtectedRoute';
 import { RoleRoute } from '@/components/routing/RoleRoute';
 import { GuestRoute } from '@/components/routing/GuestRoute';
+<<<<<<< HEAD
 import { RoleHomeRedirect } from '@/components/routing/RoleHomeRedirect';
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { FullPageLoader } from '@/components/ui/FullPageLoader';
 
 /*
@@ -30,7 +33,10 @@ const UnsubscribePage = lazy(() => import('@/pages/UnsubscribePage'));
 
 // Auth
 const LoginPage = lazy(() => import('@/pages/auth/LoginPage'));
+<<<<<<< HEAD
 const VerifyOtpPage = lazy(() => import('@/pages/auth/VerifyOtpPage'));
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 const RegisterPage = lazy(() => import('@/pages/auth/RegisterPage'));
 const ForgotPasswordPage = lazy(() => import('@/pages/auth/ForgotPasswordPage'));
 const ResetPasswordPage = lazy(() => import('@/pages/auth/ResetPasswordPage'));
@@ -50,6 +56,7 @@ const TrendingEventsPage = lazy(() => import('@/pages/app/TrendingEventsPage'));
 const EventsCalendarPage = lazy(() => import('@/pages/app/EventsCalendarPage'));
 const LeaderboardsPage = lazy(() => import('@/pages/app/LeaderboardsPage'));
 const SearchResultsPage = lazy(() => import('@/pages/app/SearchResultsPage'));
+<<<<<<< HEAD
 // Attendee check-in scanner shared by club members and coordinators.
 const ScanPage = lazy(() => import('@/pages/app/ScanPage'));
 
@@ -60,6 +67,8 @@ const VolunteerTasksPage = lazy(() => import('@/pages/volunteer/VolunteerTasksPa
 const VolunteerTaskDetailPage = lazy(() => import('@/pages/volunteer/VolunteerTaskDetailPage'));
 const VolunteerAttendancePage = lazy(() => import('@/pages/volunteer/VolunteerAttendancePage'));
 const VolunteerScanPage = lazy(() => import('@/pages/volunteer/VolunteerScanPage'));
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
 // Coordinator
 const ManageDashboardPage = lazy(() => import('@/pages/manage/ManageDashboardPage'));
@@ -107,10 +116,13 @@ export default function App() {
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
           </Route>
+<<<<<<< HEAD
           {/* Reached mid-login carrying a challenge token in router state; it must
               stay accessible while signed-out and while a session is being issued,
               so it lives outside GuestRoute. */}
           <Route path="verify-otp" element={<VerifyOtpPage />} />
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
           <Route path="verify-email" element={<VerifyEmailPage />} />
 
           {/* ---------------------------- system ---------------------------- */}
@@ -121,7 +133,11 @@ export default function App() {
         {/* ================== authenticated app shell ==================== */}
         <Route path="app" element={<ProtectedRoute />}>
           <Route element={<AppLayout />}>
+<<<<<<< HEAD
             <Route index element={<RoleHomeRedirect />} />
+=======
+            <Route index element={<Navigate to="dashboard" replace />} />
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="my-events" element={<MyEventsPage />} />
             <Route path="saved" element={<MySavedEventsPage />} />
@@ -166,6 +182,7 @@ export default function App() {
               <Route path="manage/competitions/:id" element={<ManageCompetitionPage />} />
             </Route>
 
+<<<<<<< HEAD
             {/* ------- attendee check-in scanner (member + coordinator) ------- */}
             <Route element={<RoleRoute allow={['CLUB_MEMBER', 'CLUB_COORDINATOR']} />}>
               <Route path="scan" element={<ScanPage />} />
@@ -185,6 +202,8 @@ export default function App() {
               <Route path="volunteer/scan" element={<VolunteerScanPage />} />
             </Route>
 
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             {/* ------------------- admin (full platform) ------------------- */}
             <Route element={<RoleRoute allow={['ADMIN']} />}>
               <Route path="admin" element={<AdminDashboardPage />} />

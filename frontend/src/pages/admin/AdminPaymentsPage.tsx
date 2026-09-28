@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import { Download, ExternalLink, Package, RotateCcw } from 'lucide-react';
+=======
+import { Download, ExternalLink, RotateCcw } from 'lucide-react';
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import toast from 'react-hot-toast';
 import { adminService, paymentService } from '@/lib/services';
 import { useQuery } from '@/hooks/useApi';
@@ -35,16 +39,20 @@ export default function AdminPaymentsPage() {
   const [status, setStatus] = useState<PaymentStatus | ''>('');
   const [toRefund, setToRefund] = useState<PaymentResponse | null>(null);
   const [downloadingId, setDownloadingId] = useState<number | null>(null);
+<<<<<<< HEAD
   // Bulk receipt download: selection accumulates across pages so an admin can
   // gather receipts spanning several pages, then export them all as one ZIP.
   const [selected, setSelected] = useState<Set<number>>(new Set());
   const [zipping, setZipping] = useState(false);
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
   const { data, loading, error, reload } = useQuery(
     () => adminService.listPayments({ status: status || undefined, page, size: PAGE_SIZE }),
     [status, page],
   );
 
+<<<<<<< HEAD
   // Only completed payments (paid or refunded) have a downloadable receipt.
   const rows = data?.content ?? [];
   const receiptable = rows.filter((p) => p.status === 'SUCCESS' || p.status === 'REFUNDED');
@@ -84,6 +92,8 @@ export default function AdminPaymentsPage() {
     }
   }
 
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   async function confirmRefund() {
     if (!toRefund) return;
     try {
@@ -122,7 +132,10 @@ export default function AdminPaymentsPage() {
             value={status}
             onChange={(e) => {
               setPage(0);
+<<<<<<< HEAD
               setSelected(new Set());
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
               setStatus(e.target.value as PaymentStatus | '');
             }}
             aria-label="Filter by status"
@@ -158,6 +171,7 @@ export default function AdminPaymentsPage() {
           />
         ) : (
           <>
+<<<<<<< HEAD
             {selected.size > 0 && (
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 dark:border-brand-900/50 dark:bg-brand-900/20">
                 <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
@@ -173,11 +187,14 @@ export default function AdminPaymentsPage() {
                 </div>
               </div>
             )}
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
             <div className="card overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-800">
                   <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500 dark:bg-slate-800/50 dark:text-slate-400">
                     <tr>
+<<<<<<< HEAD
                       <th className="px-4 py-3">
                         <input
                           type="checkbox"
@@ -188,6 +205,8 @@ export default function AdminPaymentsPage() {
                           aria-label="Select every receipt on this page"
                         />
                       </th>
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                       <th className="px-4 py-3 font-medium">Payer</th>
                       <th className="px-4 py-3 font-medium">Event</th>
                       <th className="px-4 py-3 font-medium">Amount</th>
@@ -201,6 +220,7 @@ export default function AdminPaymentsPage() {
                     {data.content.map((p) => (
                       <tr key={p.id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/30">
                         <td className="px-4 py-3">
+<<<<<<< HEAD
                           {(p.status === 'SUCCESS' || p.status === 'REFUNDED') && (
                             <input
                               type="checkbox"
@@ -212,6 +232,8 @@ export default function AdminPaymentsPage() {
                           )}
                         </td>
                         <td className="px-4 py-3">
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
                           <div className="flex items-center gap-2">
                             <Avatar name={p.userName} size="sm" />
                             <span className="font-medium text-slate-900 dark:text-slate-100">

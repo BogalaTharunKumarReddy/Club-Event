@@ -1,11 +1,18 @@
 /**
  * Reusable certificate-design editor.
  *
+<<<<<<< HEAD
  * Drives a {@link CertificateTemplateRequest}: a full-bleed background image (uploaded via
  * {@link ImageUpload} and stored as a resolvable URL) with the recipient name, event, date,
  * title and a verification QR overlaid at configurable positions. A live preview mirrors the
  * server-side OpenPDF layout so coordinators and admins can see roughly what a participant
  * will download.
+=======
+ * Drives a {@link CertificateTemplateRequest}: a full-bleed background image (URL or
+ * data-URL) with the recipient name, event, date, title and a verification QR overlaid
+ * at configurable positions. A live preview mirrors the server-side OpenPDF layout so
+ * coordinators and admins can see roughly what a participant will download.
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
  *
  * Shared by the coordinator event-certificate tab and the admin template library, so it
  * carries the payment-gate and auto-issue controls too; callers decide whether to show them.
@@ -13,7 +20,10 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Award, QrCode } from 'lucide-react';
 import { Button, Field, Select, TextArea, TextInput } from '@/components/ui';
+<<<<<<< HEAD
 import { ImageUpload } from './ImageUpload';
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 import { CERTIFICATE_SCOPE_LABELS, CERTIFICATE_TYPE_LABELS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import type {
@@ -369,6 +379,7 @@ export function CertificateTemplateForm({
           />
         </Field>
 
+<<<<<<< HEAD
         <ImageUpload
           label="Background image"
           shape="wide"
@@ -377,6 +388,20 @@ export function CertificateTemplateForm({
           value={draft.backgroundImageUrl}
           onChange={(url) => set('backgroundImageUrl', url)}
         />
+=======
+        <Field
+          label="Background image URL"
+          htmlFor="tpl-bg"
+          hint="Paste a link to your certificate background (landscape works best). A data: URL is fine too. Leave blank for a plain bordered layout."
+        >
+          <TextInput
+            id="tpl-bg"
+            value={draft.backgroundImageUrl}
+            onChange={(e) => set('backgroundImageUrl', e.target.value)}
+            placeholder="https://…/certificate-background.png"
+          />
+        </Field>
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 
         <div className="rounded-lg border border-slate-200 p-4 dark:border-slate-700">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">

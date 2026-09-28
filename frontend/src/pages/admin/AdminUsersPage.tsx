@@ -266,7 +266,11 @@ export default function AdminUsersPage() {
         onClose={() => setToDelete(null)}
         onConfirm={confirmDelete}
         title="Delete user"
+<<<<<<< HEAD
         message={`Permanently delete ${toDelete?.fullName}? This removes their registrations, memberships, certificates, payments and any teams they lead. Clubs and events they created are kept (ownership is cleared). This cannot be undone.`}
+=======
+        message={`Permanently delete ${toDelete?.fullName}? This cannot be undone. If the account owns clubs or events, disable it instead.`}
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
         confirmLabel="Delete user"
         danger
       />

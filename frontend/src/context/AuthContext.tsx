@@ -13,11 +13,15 @@ import { setAuthFailureHandler } from '@/lib/api';
 import { tokenStore } from '@/lib/tokenStore';
 import type {
   AuthResponse,
+<<<<<<< HEAD
   LoginOtpRequest,
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   LoginRequest,
   RegisterRequest,
   Role,
   UserResponse,
+<<<<<<< HEAD
   VerifyOtpRequest,
 } from '@/types';
 
@@ -30,17 +34,25 @@ export type LoginOutcome =
   | { status: 'authenticated'; user: UserResponse }
   | { status: 'challenge'; challengeToken: string };
 
+=======
+} from '@/types';
+
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
 interface AuthContextValue {
   user: UserResponse | null;
   /** True while the initial "restore session" check is running. */
   initializing: boolean;
   isAuthenticated: boolean;
+<<<<<<< HEAD
   /** Password sign-in. Resolves to an authenticated session or a 2FA challenge. */
   login: (credentials: LoginRequest) => Promise<LoginOutcome>;
   /** Passwordless sign-in: request a one-time code by email + WhatsApp. */
   requestLoginOtp: (payload: LoginOtpRequest) => Promise<{ challengeToken: string }>;
   /** Complete any OTP challenge (2FA or passwordless) with the 6-digit code. */
   verifyOtp: (payload: VerifyOtpRequest) => Promise<UserResponse>;
+=======
+  login: (credentials: LoginRequest) => Promise<UserResponse>;
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   register: (payload: RegisterRequest) => Promise<UserResponse>;
   logout: () => void;
   refreshUser: () => Promise<void>;
@@ -72,6 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = useCallback(
+<<<<<<< HEAD
     async (credentials: LoginRequest): Promise<LoginOutcome> => {
       const auth = await authService.login(credentials);
       // A 2FA-enabled account gets a challenge instead of tokens; the caller
@@ -98,6 +111,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const verifyOtp = useCallback(
     async (payload: VerifyOtpRequest) => {
       const auth = await authService.verifyOtp(payload);
+=======
+    async (credentials: LoginRequest) => {
+      const auth = await authService.login(credentials);
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       return applySession(auth);
     },
     [applySession],
@@ -163,15 +180,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       initializing,
       isAuthenticated: !!user,
       login,
+<<<<<<< HEAD
       requestLoginOtp,
       verifyOtp,
+=======
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
       register,
       logout,
       refreshUser,
       hasRole,
       setUser,
     }),
+<<<<<<< HEAD
     [user, initializing, login, requestLoginOtp, verifyOtp, register, logout, refreshUser, hasRole, setUser],
+=======
+    [user, initializing, login, register, logout, refreshUser, hasRole, setUser],
+>>>>>>> f117f25f2db8e7e1d3024b22a6e4d99cb85b01e6
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
