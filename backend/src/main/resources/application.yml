@@ -1,6 +1,7 @@
 server:
   # Render provides PORT automatically; SERVER_PORT remains useful for local runs.
   port: ${PORT:${SERVER_PORT:8080}}
+  address: 0.0.0.0
   error:
     # Only echo exception messages / binding errors when explicitly requested (?message=…),
     # so production responses don't leak internals. Flip to 'always' locally if you want them.
