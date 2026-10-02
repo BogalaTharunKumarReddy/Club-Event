@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 
 import './i18n';
 import './index.css';
@@ -20,6 +21,7 @@ createRoot(rootEl).render(
         <AuthProvider>
           <NotificationProvider>
             <App />
+            <Analytics />
             <Toaster
               position="top-right"
               toastOptions={{
